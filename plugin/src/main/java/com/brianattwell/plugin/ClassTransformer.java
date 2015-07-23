@@ -15,6 +15,7 @@ public class ClassTransformer implements IClassTransformer {
 
     @Override
     public void applyTransformations(CtClass ctClass) throws JavassistBuildException {
+        System.out.println(":plugin:applyTransformations on " + ctClass.getName());
         try {
             CtMethod[] methods = getOnCreateMethod(ctClass);
             for (CtMethod method : methods) {
@@ -28,14 +29,14 @@ public class ClassTransformer implements IClassTransformer {
     @Override
     public boolean shouldTransform(CtClass candidateClass) throws JavassistBuildException {
         try {
-            boolean isSupported = isSupportedClass(candidateClass);
-            return candidateClass.hasAnnotation(ExampleAnnotation.class) && isSupported;
+            return candidateClass.hasAnnotation(ExampleAnnotation.class)
+                    && isAnActivity(candidateClass);
         } catch (Exception e) {
             throw new JavassistBuildException(e);
         }
     }
 
-    private static boolean isSupportedClass(CtClass candidateClass) throws NotFoundException {
+    private static boolean isAnActivity(CtClass candidateClass) throws NotFoundException {
         // TODO: handle support activity
         return isActivity(candidateClass);
     }
