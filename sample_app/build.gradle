@@ -25,9 +25,9 @@ dependencies {
     compile project(':annotation')
 }
 
-// Import the custom gradle plugin.
-// You must execute "$ ./gradlew uploadArchives" at least once before the
-// following dependencies will work.
+// Import the custom gradle plugin. Note that we import it as a build dependency. Not
+// as a compilation dependency. FYI: You must execute "$ ./gradlew uploadArchives" at
+// least once before the following dependencies will work.
 
 buildscript {
     repositories {
