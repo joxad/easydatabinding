@@ -34,7 +34,7 @@ buildscript {
         maven {
             url uri('../repo')
         }
-        mavenCentral() // Needed for plugin's dependencies (TODO: use jcenter instead?)
+        jcenter() // Needed for plugin's dependencies
     }
     dependencies {
         classpath group: 'com.brianattwell',
