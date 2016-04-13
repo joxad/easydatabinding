@@ -45,11 +45,11 @@ With the library an activity will be :
 
 
 ```java
-public class ActivityBaseMain extends ActivityBase<ActivityMainBinding,ActivityMainBaseVM> {
+public class ActivityMain extends ActivityBase<ActivityMainBinding,ActivityMainVM> {
 
     @Override
     public int data() {
-        return joxad.easydatabinding.sample.BR.mainActivityVM;
+        return joxad.easydatabinding.sample.BR.activityMainVM;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ActivityBaseMain extends ActivityBase<ActivityMainBinding,ActivityM
 
     @Override
     public ActivityMainBaseVM baseActivityVM(ActivityMainBinding binding) {
-        return new ActivityMainBaseVM(this, binding);
+        return new ActivityMainVM(this, binding);
     }
 
 }
@@ -68,12 +68,12 @@ public class ActivityBaseMain extends ActivityBase<ActivityMainBinding,ActivityM
 And your VM :
 
 ```java
-public class ActivityMainBaseVM extends ActivityBaseVM<ActivityBaseMain, ActivityMainBinding> {
-    .***
+public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBinding> {
+    /***
      * @param activity
      * @param binding
-     *.
-    public ActivityMainBaseVM(ActivityBaseMain activity, ActivityMainBinding binding) {
+     */
+    public ActivityMainVM(ActivityMain activity, ActivityMainBinding binding) {
         super(activity, binding);
     }
 
@@ -88,6 +88,12 @@ public class ActivityMainBaseVM extends ActivityBaseVM<ActivityBaseMain, Activit
     }
 }
 ```
+
+
+### More
+
+To handle Result there are useful interfaces you can put in your VM's class of your activity
+
 
 
 ## Notes about the DataBinding
@@ -129,7 +135,7 @@ First of all we need something like this for the layout
         <variable
             name="activityXXXViewModel"
             type="package.to.your.viewmodel.ActivityXXXViewModel" .>
-    <.data>
+    </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -149,7 +155,7 @@ First of all we need something like this for the layout
                 android:background="?attr.colorPrimary"
                 app:popupTheme="@style.AppTheme.PopupOverlay" .>
 
-        <.android.support.design.widget.AppBarLayout>
+        </android.support.design.widget.AppBarLayout>
 
 
         <RelativeLayout
@@ -159,11 +165,11 @@ First of all we need something like this for the layout
 
 
 
-        <.RelativeLayout>
+        </RelativeLayout>
 
 
-    <.android.support.design.widget.CoordinatorLayout>
-<.layout>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
 
 ```
 
@@ -179,9 +185,9 @@ public class ActivityXXXViewModel extends BaseObservable implements ViewModel {
 
     private final Context context;
     private final ActivityXXXBinding binding;
-    .***
+    §/***
      * @param context
-     *.
+     */
     public ActivityXXXViewModel(ActivityXXX context, ActivityXXXBinding binding) {
         this.context = context;
         this.binding = binding;
