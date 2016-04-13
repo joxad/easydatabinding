@@ -15,7 +15,7 @@ So I make this library to avoid boilerplate, and you will be able to focus on yo
 
 Very useful lib I use :
 
-https:..github.com.evant.binding-collection-adapter
+https://github.com.evant.binding-collection-adapter
 
 It handles the databinding inside the recyclerview => No adapter to write :)
 
