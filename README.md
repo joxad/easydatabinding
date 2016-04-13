@@ -31,7 +31,6 @@ repositories {
 }
 ```
 
-
 Gradle project :
 
 ```groovy
@@ -40,10 +39,58 @@ compile "com.joxad.easydatabinding.easydatabinding:$currentVersion"
 
 
 
+### Fast Sample
+
+With the library an activity will be :
 
 
+```java
+public class ActivityBaseMain extends ActivityBase<ActivityMainBinding,ActivityMainBaseVM> {
 
-## DataBinding
+    @Override
+    public int data() {
+        return joxad.easydatabinding.sample.BR.mainActivityVM;
+    }
+
+    @Override
+    public int layoutResources() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public ActivityMainBaseVM baseActivityVM(ActivityMainBinding binding) {
+        return new ActivityMainBaseVM(this, binding);
+    }
+
+}
+```
+
+And your VM :
+
+```java
+public class ActivityMainBaseVM extends ActivityBaseVM<ActivityBaseMain, ActivityMainBinding> {
+    .***
+     * @param activity
+     * @param binding
+     *.
+    public ActivityMainBaseVM(ActivityBaseMain activity, ActivityMainBinding binding) {
+        super(activity, binding);
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+}
+```
+
+
+## Notes about the DataBinding
 
 - Each Activity or Fragmentis linked to a viewmodel who will expose the data to the view (layout) and handle some specific fucntionnalities
 
@@ -126,9 +173,6 @@ Then Comes our view model :
 
 ```java
 
-.**
- * Created by josh on 11.03.16.
- *.
 public class ActivityXXXViewModel extends BaseObservable implements ViewModel {
     private static final String TAG = ActivityXViewModel.class.getSimpleName();
 
@@ -152,22 +196,18 @@ public class ActivityXXXViewModel extends BaseObservable implements ViewModel {
 
 ```
 
-
 ### Activity : XXXActivity
 
 It will just manage to put the viewmodel into the activity
 
 
 ```java
-.***
-Activity example
-***.
+
 public class XXXActivity extends AppCompatActivity {
 
-    .***
-     * Cette classe est générée par le DataBinding en prenant le nom du layout {@link com.phoceis.kioskcultura_mobile.R.layout#activity_stores}
-     * et en ajoutant Binding à la fin
-     *.
+    /**
+    * Generated class by Android when used DataBinding
+    **/
     ActivityXXXBinding binding;
 
     @Override
@@ -182,55 +222,5 @@ public class XXXActivity extends AppCompatActivity {
 
 }
 
-```
-
-
-
-With the library an activity will be :
-
-
-```java
-public class ActivityBaseMain extends ActivityBase<ActivityMainBinding,ActivityMainBaseVM> {
-
-    @Override
-    public int data() {
-        return joxad.easydatabinding.sample.BR.mainActivityVM;
-    }
-
-    @Override
-    public int layoutResources() {
-        return R.layout.activity_main;
-    }
-
-    @Override
-    public ActivityMainBaseVM baseActivityVM(ActivityMainBinding binding) {
-        return new ActivityMainBaseVM(this, binding);
-    }
-
-}
-```
-
-And your VM :
-
-```java
-public class ActivityMainBaseVM extends ActivityBaseVM<ActivityBaseMain, ActivityMainBinding> {
-    .***
-     * @param activity
-     * @param binding
-     *.
-    public ActivityMainBaseVM(ActivityBaseMain activity, ActivityMainBinding binding) {
-        super(activity, binding);
-    }
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void destroy() {
-
-    }
-}
 ```
 
