@@ -19,7 +19,7 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
      */
     protected B binding;
     /***
-     * Your VM class
+     * Your IVM class
      */
     protected VM vm;
 
@@ -78,6 +78,10 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
             ((IResult) vm).onActivityResult(requestCode, resultCode, data);
     }
 
+    /***
+     * Handle the new intent
+     * @param intent
+     */
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);

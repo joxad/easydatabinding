@@ -3,19 +3,17 @@ package com.joxad.easydatabinding.base;
 import android.content.Context;
 import android.databinding.BaseObservable;
 
-import com.joxad.easydatabinding.base.VM;
-
 /**
  * {@link T} is the class of your model for all your basics VI
  */
-public abstract class BaseVM<T> extends BaseObservable implements VM {
+public abstract class BaseVM<T> extends BaseObservable implements IVM {
 
     /***
      *
      */
     private final Context context;
     /**
-     * Class Model used in your VM
+     * Class Model used in your IVM
      */
     public T model;
 

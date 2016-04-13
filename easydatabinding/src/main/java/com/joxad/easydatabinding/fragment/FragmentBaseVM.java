@@ -4,13 +4,13 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
 
-import com.joxad.easydatabinding.base.VM;
+import com.joxad.easydatabinding.base.IVM;
 
 
 /**
  * Created by josh on 13/04/16.
  */
-public abstract class FragmentBaseVM<B extends ViewDataBinding> extends BaseObservable implements VM {
+public abstract class FragmentBaseVM<B extends ViewDataBinding> extends BaseObservable implements IVM {
 
 
     protected final Context context;
