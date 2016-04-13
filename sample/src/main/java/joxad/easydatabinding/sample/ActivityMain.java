@@ -1,7 +1,6 @@
 package joxad.easydatabinding.sample;
 
 import com.joxad.easydatabinding.activity.ActivityBase;
-import com.joxad.easydatabinding.activity.ActivityBaseVM;
 
 import joxad.easydatabinding.sample.databinding.ActivityMainBinding;
 
