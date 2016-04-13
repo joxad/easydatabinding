@@ -10,8 +10,13 @@ import com.joxad.easydatabinding.base.VM;
  */
 public abstract class BaseVM<T> extends BaseObservable implements VM {
 
-
+    /***
+     *
+     */
     private final Context context;
+    /**
+     * Class Model used in your VM
+     */
     public T model;
 
     /***

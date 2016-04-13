@@ -4,6 +4,9 @@ import com.joxad.easydatabinding.activity.ActivityBase;
 
 import joxad.easydatabinding.sample.databinding.ActivityMainBinding;
 
+/**
+ *
+ */
 public class ActivityBaseMain extends ActivityBase<ActivityMainBinding,ActivityMainBaseVM> {
 
     @Override

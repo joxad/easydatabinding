@@ -5,9 +5,10 @@ import android.content.Intent;
 /**
  * Created by josh on 13/04/16.
  */
-public interface IActivityVM {
-
-    void onActivityResult(int requestCode, int resultCode, Intent data);
-
+public interface INewIntent {
+    /**
+     *
+     * @param intent
+     */
     void onNewIntent(Intent intent);
 }
