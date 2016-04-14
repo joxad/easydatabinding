@@ -1,1 +1,1 @@
-include ':easydatabinding', ':sample'
+include ':lib', ':sample'
