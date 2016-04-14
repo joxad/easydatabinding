@@ -7,6 +7,9 @@ import com.joxad.easydatabinding.activity.ActivityBaseVM;
 import joxad.easydatabinding.sample.databinding.ActivityMainBinding;
 import me.tatarka.bindingcollectionadapter.ItemView;
 
+import static joxad.easydatabinding.sample.BR.userVM;
+import static joxad.easydatabinding.sample.R.layout.item_user;
+
 
 /**
  *
@@ -16,7 +19,7 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
     /***
      * This is the itemView view that will put the user in the
      */
-    public ItemView itemView = ItemView.of(joxad.easydatabinding.sample.BR.userVM, R.layout.item_user);
+    public ItemView itemView = ItemView.of(userVM, item_user);
 
     public ObservableArrayList<UserVM> items;
 

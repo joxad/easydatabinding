@@ -80,6 +80,7 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
 
     /***
      * Handle the new intent
+     *
      * @param intent
      */
     @Override

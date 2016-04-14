@@ -4,7 +4,8 @@ import com.joxad.easydatabinding.activity.ActivityBase;
 
 import joxad.easydatabinding.sample.databinding.ActivityMainBinding;
 
-
+import static joxad.easydatabinding.sample.BR.activityMainVM;
+import static joxad.easydatabinding.sample.R.layout.activity_main;
 
 /**
  * Created by josh on 13/04/16.
@@ -12,12 +13,12 @@ import joxad.easydatabinding.sample.databinding.ActivityMainBinding;
 public class ActivityMain extends ActivityBase<ActivityMainBinding, ActivityMainVM> {
     @Override
     public int data() {
-        return joxad.easydatabinding.sample.BR.activityMainVM;
+        return activityMainVM;
     }
 
     @Override
     public int layoutResources() {
-        return R.layout.activity_main;
+        return activity_main;
     }
 
     @Override

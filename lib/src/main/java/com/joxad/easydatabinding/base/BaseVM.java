@@ -11,11 +11,11 @@ public abstract class BaseVM<T> extends BaseObservable implements IVM {
     /***
      *
      */
-    private final Context context;
+    protected final Context context;
     /**
      * Class Model used in your IVM
      */
-    public T model;
+    protected T model;
 
     /***
      * @param context
