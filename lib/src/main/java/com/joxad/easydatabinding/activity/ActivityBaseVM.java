@@ -29,4 +29,18 @@ public abstract class ActivityBaseVM<A extends ActivityBase, B extends ViewDataB
         this.binding = binding;
         init();
     }
+
+    /***
+     * LifeCycle of the Activity
+     */
+    protected void onResume() {
+
+    }
+
+    /***
+     * LifeCycle of the Activity
+     */
+    protected void onPause() {
+
+    }
 }

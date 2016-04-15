@@ -26,6 +26,19 @@ public abstract class FragmentBaseVM<B extends ViewDataBinding> extends BaseObse
         init();
     }
 
+    /***
+     * LifeCycle of the Activity
+     */
+    protected void onResume() {
+
+    }
+
+    /***
+     * LifeCycle of the Activity
+     */
+    protected void onPause() {
+
+    }
 
     public abstract void init();
 }
