@@ -28,7 +28,8 @@ public abstract class FragmentBase<B extends ViewDataBinding, VM extends Fragmen
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, layoutResources(), container, false);
-        binding.setVariable(data(), baseFragmentVM(binding));
+        vm = baseFragmentVM(binding);
+        binding.setVariable(data(), vm);
         return binding.getRoot();
     }
 

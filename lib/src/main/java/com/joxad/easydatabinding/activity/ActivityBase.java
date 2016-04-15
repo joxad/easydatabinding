@@ -27,7 +27,8 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, layoutResources());
-        binding.setVariable(data(), baseActivityVM(binding));
+        vm = baseActivityVM(binding);
+        binding.setVariable(data(), vm);
     }
 
     /**
