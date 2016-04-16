@@ -1,6 +1,5 @@
 package com.joxad.easydatabinding.fragment;
 
-import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
 
@@ -10,31 +9,36 @@ import com.joxad.easydatabinding.base.IVM;
 /**
  * Created by josh on 13/04/16.
  */
-public abstract class FragmentBaseVM<B extends ViewDataBinding> extends BaseObservable implements IVM {
+public abstract class FragmentBaseVM<F extends FragmentBase, B extends ViewDataBinding> extends BaseObservable implements IVM {
 
-
-    protected final Context context;
+    /***
+     * {@link F} is the fragment that use the current VM
+     */
+    protected F fragment;
+    /**
+     * {@link B} will be used to find the views inside the fragment
+     */
     protected B binding;
 
     /***
-     * @param context
+     * @param
      * @param binding
      */
-    public FragmentBaseVM(Context context, B binding) {
-        this.context = context;
+    public FragmentBaseVM(F fragment, B binding) {
+        this.fragment = fragment;
         this.binding = binding;
         init();
     }
 
     /***
-     * LifeCycle of the Activity
+     * LifeCycle of the Fragment
      */
     protected void onResume() {
 
     }
 
     /***
-     * LifeCycle of the Activity
+     * LifeCycle of the fragment
      */
     protected void onPause() {
 
