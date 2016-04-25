@@ -2,7 +2,7 @@
 This project goal is to create activity fragment and views, with less code to be more efficient on the view models
 
 
-# Version : 0.3.1
+# Version : 0.4.0
 # Goal
 
 I used DataBinding for a few weeks since Google allows us to use it.
@@ -35,7 +35,7 @@ repositories {
 Gradle project :
 
 ```groovy
-compile "com.joxad.easydatabinding.easydatabinding:$currentVersion"
+compile "com.joxad.easydatabinding.lib:$currentVersion"
 ```
 
 
@@ -99,7 +99,7 @@ To handle Result there are useful interfaces you can put in your VM's class of y
 
 ## Notes about the DataBinding
 
-- Each Activity or Fragmentis linked to a viewmodel who will expose the data to the view (layout) and handle some specific fucntionnalities
+- Each Activity or Fragment is linked to a viewmodel who will expose the data to the view (layout) and handle some specific fucntionnalities
 
 
 - ViewModel will also handle some treatments :
