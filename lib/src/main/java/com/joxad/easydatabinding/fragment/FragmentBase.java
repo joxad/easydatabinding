@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 
 import com.joxad.easydatabinding.activity.IPermission;
 
+import lombok.Getter;
+
 /**
  * Created by josh on 13/04/16.
  */
@@ -21,10 +23,12 @@ public abstract class FragmentBase<B extends ViewDataBinding, VM extends Fragmen
     /***
      * FragmentBinding used in this view
      */
+    @Getter
     protected B binding;
     /***
      * The view model that will be used to handle this fragment
      */
+    @Getter
     protected VM vm;
 
     @Nullable
