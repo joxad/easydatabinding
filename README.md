@@ -2,7 +2,7 @@
 This project goal is to create activity fragment and views, with less code to be more efficient on the view models
 
 
-# Version : 0.4.0
+# Version : 0.4.2K
 # Goal
 
 I used DataBinding for a few weeks since Google allows us to use it.
@@ -15,7 +15,7 @@ So I make this library to avoid boilerplate, and you will be able to focus on yo
 
 Very useful lib I use :
 
-https://github.com.evant.binding-collection-adapter/
+https://github.com/evant/binding-collection-adapter/
 
 
 It handles the databinding inside the recyclerview => No adapter to write :)
