@@ -2,7 +2,7 @@
 This project goal is to create activity fragment and views, with less code to be more efficient on the view models
 
 
-# Version : 0.4.2K
+# Version : 0.4.5
 # Goal
 
 I used DataBinding for a few weeks since Google allows us to use it.

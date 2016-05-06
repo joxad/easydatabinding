@@ -31,10 +31,14 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, layoutResources());
-        vm = baseActivityVM(binding);
+        vm = baseActivityVM(binding,savedInstanceState);
         binding.setVariable(data(), vm);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (vm.onBackPressed() ) super.onBackPressed();
+    }
 
     @Override
     protected void onResume() {
@@ -64,9 +68,10 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
 
     /***
      * @param binding
+     * @param savedInstanceState
      * @return the {@link VM} you want to use in this activity
      */
-    public abstract VM baseActivityVM(B binding);
+    public abstract VM baseActivityVM(B binding, Bundle savedInstanceState);
 
 
     /***

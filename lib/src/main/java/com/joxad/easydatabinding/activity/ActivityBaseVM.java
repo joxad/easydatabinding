@@ -43,4 +43,13 @@ public abstract class ActivityBaseVM<A extends ActivityBase, B extends ViewDataB
     protected void onPause() {
 
     }
+
+    /***
+     * Manage the backpressed
+     *
+     * @return true if u want to call super
+     */
+    protected boolean onBackPressed() {
+        return true;
+    }
 }

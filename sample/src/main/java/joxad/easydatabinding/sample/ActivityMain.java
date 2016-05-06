@@ -1,5 +1,7 @@
 package joxad.easydatabinding.sample;
 
+import android.os.Bundle;
+
 import com.joxad.easydatabinding.activity.ActivityBase;
 
 import joxad.easydatabinding.sample.databinding.ActivityMainBinding;
@@ -22,7 +24,7 @@ public class ActivityMain extends ActivityBase<ActivityMainBinding, ActivityMain
     }
 
     @Override
-    public ActivityMainVM baseActivityVM(ActivityMainBinding binding) {
+    public ActivityMainVM baseActivityVM(ActivityMainBinding binding, Bundle savedInstanceState) {
         return new ActivityMainVM(this, binding);
     }
 }
