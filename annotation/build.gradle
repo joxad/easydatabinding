@@ -1,5 +1,4 @@
 apply plugin: 'java'
-
 apply plugin: 'maven'
 
 // This is important for publishing, even if Android Studio claims it isn't
