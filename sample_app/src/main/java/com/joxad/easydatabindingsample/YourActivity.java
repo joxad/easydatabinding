@@ -3,6 +3,7 @@ package com.joxad.easydatabindingsample;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.joxad.easydatabinding.activity.ActivityBase;
 import com.joxad.easydatabinding.annotation.ExampleAnnotation;
 
 
@@ -13,9 +14,4 @@ import com.joxad.easydatabinding.annotation.ExampleAnnotation;
 @ExampleAnnotation
 public class YourActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.your_activity);
-    }
 }
