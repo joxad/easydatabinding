@@ -7,7 +7,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
+
         <activity android:name=".ActivityMain">
+
+        </activity>
+
+        <activity android:name=".ActivitySample">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
