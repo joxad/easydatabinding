@@ -21,7 +21,7 @@ dependencies {
     compile gradleApi()
 }
 
-group = 'com.brianattwell'
+group = 'com.joxad.easydatabinding'
 version = '1.0-SNAPSHOT'
 
 // The following code is optional. If you don't specify this, the repository location

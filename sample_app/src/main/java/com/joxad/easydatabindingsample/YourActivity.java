@@ -1,9 +1,10 @@
-package com.brianattwell.github;
+package com.joxad.easydatabindingsample;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.brianattwell.annotation.ExampleAnnotation;
+import com.joxad.easydatabinding.annotation.ExampleAnnotation;
+
 
 /**
  * Example activity that uses @ExampleAnnotation to insert code into the bottom
