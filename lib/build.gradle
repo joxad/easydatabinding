@@ -25,6 +25,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile libs.appCompat
-    provided libs.lombok
 }
 apply from: '../gradle/tasks/bintray_upload.gradle'

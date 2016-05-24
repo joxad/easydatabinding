@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+// This is important for publishing, even if Android Studio claims it isn't
+// used. Android can't interpret Java 8 byte code.
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // needed to perform byte code generation
+    compile 'com.github.stephanenicolas.javassist:javassist-build-plugin-api:1.0.0'
+    // needed to create a plugin
+    compile 'com.github.stephanenicolas.morpheus:morpheus-plugin:1.0.7'
+    compile 'com.github.stephanenicolas.morpheus:morpheus-commons:1.0.7'
+
+    compile project (':annotation')
+    compile gradleApi()
+}
+
+group = 'com.joxad.easydatabinding'
+version = '1.0-SNAPSHOT'
+
+// The following code is optional. If you don't specify this, the repository location
+// will be something like "/Users/brianattwell/.m2/repositories/".
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
+}
