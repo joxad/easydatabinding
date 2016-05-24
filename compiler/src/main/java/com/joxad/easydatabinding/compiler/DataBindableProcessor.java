@@ -10,26 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.*;
 import javax.annotation.processing.Messager;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.Processor;
-import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
-import static com.joxad.easydatabinding.compiler.Utils.getPackageName;
 import static com.squareup.javapoet.JavaFile.builder;
 import static java.util.Collections.singleton;
 import static javax.lang.model.SourceVersion.latestSupported;
-import static javax.tools.Diagnostic.Kind.ERROR;
+import static javax.tools.Diagnostic.Kind.*;
+
 
 @AutoService(Processor.class)
 public class DataBindableProcessor extends AbstractProcessor {
 
-    private static final String ANNOTATION = "@" + DataBindableProcessor.class.getSimpleName();
+    private static final String ANNOTATION = "@" + DataBindable.class.getSimpleName();
 
     private Messager messager;
 
@@ -111,7 +108,7 @@ public class DataBindableProcessor extends AbstractProcessor {
         if (annos.size() == 0) {
             return;
         }
-        String packageName = getPackageName(processingEnv.getElementUtils(),
+        String packageName = Utils.getPackageName(processingEnv.getElementUtils(),
                 annos.get(0).typeElement);
         TypeSpec generatedClass = CodeGenerator.generateClass(annos);
 

@@ -5,15 +5,16 @@ import com.squareup.javapoet.TypeSpec;
 
 import java.util.List;
 
+import static com.squareup.javapoet.ClassName.get;
 import static com.squareup.javapoet.MethodSpec.methodBuilder;
-import static com.squareup.javapoet.TypeName.get;
 import static com.squareup.javapoet.TypeSpec.classBuilder;
-import static javax.lang.model.element.Modifier.STATIC;
 import static javax.lang.model.element.Modifier.FINAL;
 import static javax.lang.model.element.Modifier.PUBLIC;
+import static javax.lang.model.element.Modifier.STATIC;
+
 final class CodeGenerator {
 
-    private static final String CLASS_NAME = "StringUtil";
+    private static final String CLASS_NAME = "DataBindableUtil";
 
     public static TypeSpec generateClass(List<AnnotatedClass> classes) {
         TypeSpec.Builder builder =  classBuilder(CLASS_NAME)
