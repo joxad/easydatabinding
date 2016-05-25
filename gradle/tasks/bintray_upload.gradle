@@ -1,0 +1,70 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+version = VERSION_NAME
+
+def gitUrl = POM_URL
+def siteUrl = POM_URL
+
+group = POM_GROUP
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging POM_PACKAGING
+
+                name POM_NAME
+                description POM_DESCRIPTION
+                url POM_URL
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id POM_DEVELOPER_ID
+                        name POM_DEVELOPER_NAME
+                        email POM_DEVELOPER_EMAIL
+                    }
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives sourcesJar
+}
+
+
+bintray {
+    user = BINTRAY_USER
+    key = BINTRAY_API_KEY
+
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = POM_NAME
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
+
