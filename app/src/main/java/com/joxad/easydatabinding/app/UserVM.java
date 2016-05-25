@@ -12,7 +12,6 @@ import com.joxad.easydatabinding.base.BaseVM;
 @DataBindable
 public class UserVM extends BaseVM<User> {
 
-    public String name;
     /***
      * @param context
      * @param model
@@ -31,10 +30,9 @@ public class UserVM extends BaseVM<User> {
 
     }
 
-
     @Bindable
     public String getName(){
-        return getModel().name;
+        return model.name;
     }
 
 }

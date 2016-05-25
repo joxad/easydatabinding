@@ -1,6 +1,5 @@
 package com.joxad.easydatabinding.app;
 
-import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 
 import com.joxad.easydatabinding.activity.ActivityBaseVM;
@@ -17,7 +16,7 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
     /***
      * This is the itemView view that will put the user in the
      */
-    public ItemView itemView = ItemView.of(com.joxad.easydatabinding.app.BR.userVM, R.layout.item_user);
+    public ItemView itemView = ItemView.of(BR.userVM, R.layout.item_user);
 
     public ObservableArrayList<UserVM> items;
 
@@ -37,8 +36,6 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
         }
 
     }
-
-    @Bindable
 
     @Override
     public void destroy() {

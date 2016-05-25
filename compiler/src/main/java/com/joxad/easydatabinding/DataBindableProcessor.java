@@ -23,11 +23,9 @@ import static com.squareup.javapoet.JavaFile.builder;
 import static java.util.Collections.singleton;
 import static javax.lang.model.SourceVersion.latestSupported;
 import static javax.tools.Diagnostic.Kind.ERROR;
-import static javax.tools.Diagnostic.Kind.NOTE;
-import static javax.tools.Diagnostic.Kind.WARNING;
 
 @AutoService(Processor.class)
-public class StaticStringUtilProcessor extends AbstractProcessor {
+public class DataBindableProcessor extends AbstractProcessor {
 
     private static final String ANNOTATION = "@" + DataBindable.class.getSimpleName();
 
@@ -107,18 +105,25 @@ public class StaticStringUtilProcessor extends AbstractProcessor {
         return new AnnotatedClass(annotatedClass, variableNames);
     }
 
+    /***
+     *
+     * @param annos
+     * @throws NoPackageNameException
+     * @throws IOException
+     */
     private void generate(List<AnnotatedClass> annos) throws NoPackageNameException, IOException {
         if (annos.size() == 0) {
             return;
         }
 
-        String packageName = Utils.getPackageName(processingEnv.getElementUtils(),
-                annos.get(0).typeElement);
+        for (AnnotatedClass annotatedClass : annos) {
+            String packageName = Utils.getPackageName(processingEnv.getElementUtils(), annotatedClass.typeElement);
+            TypeSpec genratedClass = CodeGenerator.generateClass(packageName,annotatedClass);
 
-        TypeSpec generatedClass = CodeGenerator.generateClass(annos);
+            JavaFile javaFile = builder(packageName, genratedClass).build();
+            javaFile.writeTo(processingEnv.getFiler());
+        }
 
-        JavaFile javaFile = builder(packageName, generatedClass).build();
-        javaFile.writeTo(processingEnv.getFiler());
     }
 }
 

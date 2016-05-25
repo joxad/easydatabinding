@@ -12,7 +12,7 @@ import com.joxad.easydatabinding.app.databinding.ActivityMainBinding;
 public class ActivityMain extends ActivityBase<ActivityMainBinding, ActivityMainVM> {
     @Override
     public int data() {
-        return com.joxad.easydatabinding.app.BR.activityMainVM;
+        return BR.activityMainVM;
     }
 
     @Override
