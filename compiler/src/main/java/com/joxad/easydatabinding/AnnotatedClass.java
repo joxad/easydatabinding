@@ -6,7 +6,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
 
-class AnnotatedClass {
+public class AnnotatedClass {
     public final String annotatedClassName;
     public final List<VariableElement> variableNames;
     public final TypeElement typeElement;

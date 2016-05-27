@@ -56,20 +56,26 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
      *
      * @return
      */
-    public abstract int data();
+    public int data() {
+        return -1;
+    }
 
     /***
      * @return your layout resources
      */
     @LayoutRes
-    public abstract int layoutResources();
+    public int layoutResources() {
+        return -1;
+    }
 
     /***
      * @param binding
      * @param savedInstanceState
      * @return the {@link VM} you want to use in this activity
      */
-    public abstract VM baseActivityVM(B binding, Bundle savedInstanceState);
+    public VM baseActivityVM(B binding, Bundle savedInstanceState) {
+        return null;
+    }
 
 
     /***

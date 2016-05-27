@@ -1,10 +1,14 @@
-package com.joxad.easydatabinding;
+package com.joxad.easydatabinding.processor;
 
-import com.google.auto.service.AutoService;
+import com.joxad.easydatabinding.AnnotatedClass;
+import com.joxad.easydatabinding.utils.ClassValidator;
+import com.joxad.easydatabinding.utils.NoPackageNameException;
+import com.joxad.easydatabinding.utils.Utils;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +16,6 @@ import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
@@ -24,35 +27,17 @@ import static java.util.Collections.singleton;
 import static javax.lang.model.SourceVersion.latestSupported;
 import static javax.tools.Diagnostic.Kind.ERROR;
 
-@AutoService(Processor.class)
-public class BindableModelProcessor extends AbstractProcessor {
-
-    private static final String ANNOTATION = "@" + BindableModel.class.getSimpleName();
+/**
+ * Created by josh on 27/05/16.
+ */
+public abstract class BaseProcessor extends AbstractProcessor {
 
     private Messager messager;
 
     @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-        messager = processingEnv.getMessager();
-    }
-
-    @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        return singleton(BindableModel.class.getCanonicalName());
-    }
-
-    @Override
-    public SourceVersion getSupportedSourceVersion() {
-        return latestSupported();
-    }
-
-    @Override
-    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+    public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
         ArrayList<AnnotatedClass> annotatedClasses = new ArrayList<>();
-        for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(BindableModel.class)) {
-            // Our annotation is defined with @Target(value=TYPE). Therefore, we can assume that
-            // this annotatedElement is a TypeElement.
+        for (Element annotatedElement : roundEnvironment.getElementsAnnotatedWith(annotation())) {
             TypeElement annotatedClass = (TypeElement) annotatedElement;
             if (!isValidClass(annotatedClass)) {
                 return true;
@@ -67,7 +52,7 @@ public class BindableModelProcessor extends AbstractProcessor {
         }
         try {
             generate(annotatedClasses);
-        } catch (com.joxad.easydatabinding.NoPackageNameException | IOException e) {
+        } catch (NoPackageNameException | IOException e) {
             messager.printMessage(ERROR, "Couldn't generate class");
         }
         return true;
@@ -77,14 +62,14 @@ public class BindableModelProcessor extends AbstractProcessor {
 
         if (!ClassValidator.isPublic(annotatedClass)) {
             String message = String.format("Classes annotated with %s must be public.",
-                    ANNOTATION);
+                    annotationName());
             messager.printMessage(ERROR, message, annotatedClass);
             return false;
         }
 
         if (ClassValidator.isAbstract(annotatedClass)) {
             String message = String.format("Classes annotated with %s must not be abstract.",
-                    ANNOTATION);
+                    annotationName());
             messager.printMessage(ERROR, message, annotatedClass);
             return false;
         }
@@ -106,23 +91,61 @@ public class BindableModelProcessor extends AbstractProcessor {
     }
 
     /***
+     * * @param annos
      *
-     ** @param annos
      * @throws NoPackageNameException
      * @throws IOException
      */
-    private void generate( List<AnnotatedClass> annos) throws NoPackageNameException, IOException {
+    private void generate(List<AnnotatedClass> annos) throws NoPackageNameException, IOException {
         if (annos.size() == 0) {
             return;
         }
         for (AnnotatedClass annotatedClass : annos) {
             String packageName = Utils.getPackageName(processingEnv.getElementUtils(), annotatedClass.typeElement);
-            TypeSpec genratedClass = CodeGenerator.generateBaseVMClass(packageName,annotatedClass);
 
-            JavaFile javaFile = builder(packageName, genratedClass).build();
+            JavaFile javaFile = builder(packageName, generateTypeSpec(packageName, annotatedClass)).build();
             javaFile.writeTo(processingEnv.getFiler());
         }
 
     }
-}
 
+
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+        messager = processingEnv.getMessager();
+    }
+
+    @Override
+    public Set<String> getSupportedAnnotationTypes() {
+        return singleton(canonicalName());
+    }
+
+    @Override
+    public SourceVersion getSupportedSourceVersion() {
+        return latestSupported();
+    }
+
+    /**
+     * Name of the annotation to handle
+     *
+     * @return
+     */
+    public abstract Class<? extends Annotation> annotation();
+
+    public abstract String canonicalName();
+
+    /***
+     * Implements this method to generate the class your need according to the @Annotation that is handled
+     *
+     * @return
+     * @param packageName
+     * @param annotatedClass
+     */
+    public abstract TypeSpec generateTypeSpec(String packageName, AnnotatedClass annotatedClass);
+
+    public String annotationName() {
+        return "@" + annotation().getSimpleName();
+    }
+
+}

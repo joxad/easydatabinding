@@ -1,6 +1,12 @@
-package com.joxad.easydatabinding;
+package com.joxad.easydatabinding.processor;
 
 import com.google.auto.service.AutoService;
+import com.joxad.easydatabinding.AnnotatedClass;
+import com.joxad.easydatabinding.BindableModel;
+import com.joxad.easydatabinding.CodeGenerator;
+import com.joxad.easydatabinding.utils.ClassValidator;
+import com.joxad.easydatabinding.utils.NoPackageNameException;
+import com.joxad.easydatabinding.utils.Utils;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 
@@ -25,9 +31,9 @@ import static javax.lang.model.SourceVersion.latestSupported;
 import static javax.tools.Diagnostic.Kind.ERROR;
 
 @AutoService(Processor.class)
-public class BindableActivityProcessor extends AbstractProcessor {
+public class BindableModelProcessor extends AbstractProcessor {
 
-    private static final String ANNOTATION = "@" + BindableActivity.class.getSimpleName();
+    private static final String ANNOTATION = "@" + BindableModel.class.getSimpleName();
 
     private Messager messager;
 
@@ -51,7 +57,9 @@ public class BindableActivityProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         ArrayList<AnnotatedClass> annotatedClasses = new ArrayList<>();
         for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(BindableModel.class)) {
-           TypeElement annotatedClass = (TypeElement) annotatedElement;
+            // Our annotation is defined with @Target(value=TYPE). Therefore, we can assume that
+            // this annotatedElement is a TypeElement.
+            TypeElement annotatedClass = (TypeElement) annotatedElement;
             if (!isValidClass(annotatedClass)) {
                 return true;
             }

@@ -13,7 +13,7 @@ import javax.lang.model.element.VariableElement;
 /**
  *
  */
-final class BaseVMCodeGenerator {
+public final class BaseVMCodeGenerator {
 
     public static TypeSpec generateClass(String packageName, AnnotatedClass annotatedClass) {
 
@@ -57,8 +57,8 @@ final class BaseVMCodeGenerator {
 
         String generatedClassName = annotatedClass.annotatedClassName + "VM_";
         ClassName modelClass = ClassName.get(packageName, annotatedClass.annotatedClassName);
-        String parameterModelClass = Utils.lowerCaseFirstLetter(modelClass.simpleName());
-        ClassName baseVMClass = ClassName.get(String.format("%s.%s", AndroidUtils.PACKAGE_DATA_BINDING, AndroidUtils.PACKAGE_DATA_BINDING_BASE), AndroidUtils.CLASS_BASEVM);
+        String parameterModelClass = com.joxad.easydatabinding.utils.Utils.lowerCaseFirstLetter(modelClass.simpleName());
+        ClassName baseVMClass = ClassName.get(String.format("%s.%s", com.joxad.easydatabinding.utils.AndroidUtils.PACKAGE_DATA_BINDING, com.joxad.easydatabinding.utils.AndroidUtils.PACKAGE_DATA_BINDING_BASE), com.joxad.easydatabinding.utils.AndroidUtils.CLASS_BASEVM);
         TypeName baseModelVM = ParameterizedTypeName.get(baseVMClass, modelClass);
 
 
@@ -83,16 +83,16 @@ final class BaseVMCodeGenerator {
         for (VariableElement variableElement : annotatedClass.variableNames) {
 
             String parameter = variableElement.getSimpleName().toString();
-            String parameterUpperCase = Utils.upperCaseFirstLetter(parameter);
+            String parameterUpperCase = com.joxad.easydatabinding.utils.Utils.upperCaseFirstLetter(parameter);
 
             MethodSpec get = MethodSpec.methodBuilder(String.format("get%s", parameterUpperCase))
-                    .returns(Utils.getTypeName(variableElement.asType()))
+                    .returns(com.joxad.easydatabinding.utils.Utils.getTypeName(variableElement.asType()))
                     .addStatement(String.format("return this.model.get%s()", parameterUpperCase))
                     .addAnnotation(annotationBindable())
                     .addModifiers(Modifier.PUBLIC).build();
 
             MethodSpec set = MethodSpec.methodBuilder(String.format("set%s", parameterUpperCase))
-                    .addParameter(Utils.getTypeName(variableElement.asType()), variableElement.getSimpleName().toString())
+                    .addParameter(com.joxad.easydatabinding.utils.Utils.getTypeName(variableElement.asType()), variableElement.getSimpleName().toString())
                     .addStatement(String.format("this.model.set%s(%s)", parameterUpperCase, variableElement))
                     .addModifiers(Modifier.PUBLIC).build();
             builder.addMethod(get);
@@ -120,11 +120,11 @@ final class BaseVMCodeGenerator {
      * @return
      */
     private static ClassName annotationBindable() {
-        return ClassName.get(AndroidUtils.PACKAGE_ANDROID_DATA_BINDING, AndroidUtils.CLASS_BINDABLE);
+        return ClassName.get(com.joxad.easydatabinding.utils.AndroidUtils.PACKAGE_ANDROID_DATA_BINDING, com.joxad.easydatabinding.utils.AndroidUtils.CLASS_BINDABLE);
     }
 
 
     private static ParameterSpec contextParameter() {
-        return ParameterSpec.builder(AndroidUtils.PACKAGE_CONTEXT, AndroidUtils.CONTEXT).build();
+        return ParameterSpec.builder(com.joxad.easydatabinding.utils.AndroidUtils.PACKAGE_CONTEXT, com.joxad.easydatabinding.utils.AndroidUtils.CONTEXT).build();
     }
 }

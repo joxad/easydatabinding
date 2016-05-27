@@ -1,5 +1,7 @@
 package com.joxad.easydatabinding;
 
+import com.joxad.easydatabinding.utils.AndroidUtils;
+import com.joxad.easydatabinding.utils.Utils;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
@@ -13,7 +15,7 @@ import javax.lang.model.element.VariableElement;
 /**
  *
  */
-final class CodeGenerator {
+public final class CodeGenerator {
 
     public static TypeSpec generateClass(String packageName, AnnotatedClass annotatedClass) {
 
@@ -41,9 +43,80 @@ final class CodeGenerator {
 
 
     public static TypeSpec generateActivityBaseClass(String packageName, AnnotatedClass annotatedClass) {
+    /*    extends ActivityBase<ActivityMainBinding, ActivityMainVM> {
+            @Override
+            public int data() {
+                return com.joxad.easydatabinding.app.BR.activityMainVM;
+            }
+
+            @Override
+            public int layoutResources() {
+                return R.layout.activity_main;
+            }
+
+            @Override
+            public ActivityMainVM baseActivityVM(ActivityMainBinding
+            binding, Bundle savedInstanceState) {
+                return new ActivityMainVM(this, binding);
+            }*/
+        String generatedClassName = annotatedClass.annotatedClassName + "_";
+        ClassName modelClass = ClassName.get(packageName, annotatedClass.annotatedClassName);
+
+        String parameterModelClass = Utils.lowerCaseFirstLetter(modelClass.simpleName());
+        ClassName baseVMClass = ClassName.get(String.format("%s.%s", AndroidUtils.PACKAGE_DATA_BINDING, AndroidUtils.PACKAGE_DATA_BINDING_BASE), AndroidUtils.CLASS_BASEVM);
+        TypeName baseModelVM = ParameterizedTypeName.get(baseVMClass, modelClass);
+
+
+        //Init Method
+        MethodSpec data = MethodSpec.methodBuilder("data")
+                .addAnnotation(Override.class)
+                .addModifiers(Modifier.PUBLIC)
+                .addStatement("return %s.BR.activityMainVM", packageName)
+                .returns(Integer.class).build();
+
+        //destroy Method
+        MethodSpec layoutResources = MethodSpec.methodBuilder("destroy")
+                .addAnnotation(Override.class)
+                .addModifiers(Modifier.PUBLIC)
+                .addStatement("return R.layout.activityMainVM", packageName)
+                .returns(Integer.class).build();
+
+
+        //destroy Method
+      /*  MethodSpec baseActivityVM = MethodSpec.methodBuilder("baseActivityVM")
+                .addParameter(ParameterSpec.builder())
+                .addAnnotation(Override.class)
+                .addModifiers(Modifier.PUBLIC)
+                .addStatement("return R.layout.activityMainVM", packageName)
+                .returns(Integer.class).build();
+*/
 
         //Building the VM class
-        TypeSpec.Builder builder = TypeSpec.classBuilder("");
+        TypeSpec.Builder builder = TypeSpec.classBuilder(generatedClassName)
+                .addModifiers(Modifier.PUBLIC)
+                .superclass(baseModelVM)
+                .addMethod(data)
+                .addMethod(layoutResources);
+
+        for (VariableElement variableElement : annotatedClass.variableNames) {
+
+            String parameter = variableElement.getSimpleName().toString();
+            String parameterUpperCase = Utils.upperCaseFirstLetter(parameter);
+
+            MethodSpec get = MethodSpec.methodBuilder(String.format("get%s", parameterUpperCase))
+                    .returns(Utils.getTypeName(variableElement.asType()))
+                    .addStatement(String.format("return this.model.get%s()", parameterUpperCase))
+                    .addAnnotation(annotationBindable())
+                    .addModifiers(Modifier.PUBLIC).build();
+
+            MethodSpec set = MethodSpec.methodBuilder(String.format("set%s", parameterUpperCase))
+                    .addParameter(Utils.getTypeName(variableElement.asType()), variableElement.getSimpleName().toString())
+                    .addStatement(String.format("this.model.set%s(%s)", parameterUpperCase, variableElement))
+                    .addModifiers(Modifier.PUBLIC).build();
+            builder.addMethod(get);
+            builder.addMethod(set);
+        }
+
         return builder.build();
     }
 
@@ -55,10 +128,13 @@ final class CodeGenerator {
      */
     public static TypeSpec generateBaseVMClass(String packageName, AnnotatedClass annotatedClass) {
 
+
         String generatedClassName = annotatedClass.annotatedClassName + "VM_";
         ClassName modelClass = ClassName.get(packageName, annotatedClass.annotatedClassName);
+
         String parameterModelClass = Utils.lowerCaseFirstLetter(modelClass.simpleName());
-        ClassName baseVMClass = ClassName.get(String.format("%s.%s", AndroidUtils.PACKAGE_DATA_BINDING, AndroidUtils.PACKAGE_DATA_BINDING_BASE), AndroidUtils.CLASS_BASEVM);
+        ClassName baseVMClass = ClassName.get(String.format("%s.%s", AndroidUtils.PACKAGE_DATA_BINDING,
+                AndroidUtils.PACKAGE_DATA_BINDING_BASE), AndroidUtils.CLASS_BASEVM);
         TypeName baseModelVM = ParameterizedTypeName.get(baseVMClass, modelClass);
 
 

@@ -1,4 +1,4 @@
-package com.joxad.easydatabinding;
+package com.joxad.easydatabinding.utils;
 
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.TypeName;
@@ -11,13 +11,13 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.SimpleTypeVisitor6;
 
-final class Utils {
+public final class Utils {
 
     private Utils() {
         // no instances
     }
 
-    static String getPackageName(Elements elementUtils, TypeElement type)
+    public static String getPackageName(Elements elementUtils, TypeElement type)
             throws NoPackageNameException {
         PackageElement pkg = elementUtils.getPackageOf(type);
         if (pkg.isUnnamed()) {
@@ -32,7 +32,7 @@ final class Utils {
      * @param str
      * @return
      */
-    static String upperCaseFirstLetter(String str) {
+    public static String upperCaseFirstLetter(String str) {
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
@@ -42,20 +42,23 @@ final class Utils {
      * @param str
      * @return
      */
-    static String lowerCaseFirstLetter(String str) {
+    public static String lowerCaseFirstLetter(String str) {
         return str.substring(0, 1).toLowerCase() + str.substring(1);
     }
 
 
-
-    /** Returns a string for {@code type}. Primitive types are always boxed. */
-    public static TypeName getTypeName(TypeMirror type)  {
+    /**
+     * Returns a string for {@code type}. Primitive types are always boxed.
+     */
+    public static TypeName getTypeName(TypeMirror type) {
         return type.accept(new SimpleTypeVisitor6<TypeName, Void>() {
-            @Override public TypeName visitPrimitive(PrimitiveType primitiveType, Void v) {
+            @Override
+            public TypeName visitPrimitive(PrimitiveType primitiveType, Void v) {
                 return box(primitiveType);
             }
 
-            @Override public TypeName visitError(ErrorType errorType, Void v) {
+            @Override
+            public TypeName visitError(ErrorType errorType, Void v) {
                 // Error type found, a type may not yet have been generated, but we need the type
                 // so we can generate the correct code in anticipation of the type being available
                 // to the compiler.
@@ -73,15 +76,15 @@ final class Utils {
                 return ClassName.bestGuess(errorType.toString());
             }
 
-            @Override protected TypeName defaultAction(TypeMirror typeMirror, Void v) {
+            @Override
+            protected TypeName defaultAction(TypeMirror typeMirror, Void v) {
                 return TypeName.get(typeMirror);
             }
         }, null);
     }
 
 
-
-    static TypeName box(PrimitiveType primitiveType) {
+    public static TypeName box(PrimitiveType primitiveType) {
         switch (primitiveType.getKind()) {
             case BYTE:
                 return ClassName.get(Byte.class);

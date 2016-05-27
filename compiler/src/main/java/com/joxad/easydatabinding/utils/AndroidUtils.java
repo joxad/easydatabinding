@@ -1,4 +1,4 @@
-package com.joxad.easydatabinding;
+package com.joxad.easydatabinding.utils;
 
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.TypeName;
