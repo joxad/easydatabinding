@@ -3,13 +3,11 @@ package com.joxad.easydatabinding.app;
 import android.content.Context;
 import android.databinding.Bindable;
 
-import com.joxad.easydatabinding.DataBindable;
 import com.joxad.easydatabinding.base.BaseVM;
 
 /**
  * Created by josh on 13/04/16.
  */
-@DataBindable
 public class UserVM extends BaseVM<User> {
 
     /***
@@ -22,7 +20,6 @@ public class UserVM extends BaseVM<User> {
 
     @Override
     public void init() {
-
     }
 
     @Override
@@ -32,7 +29,9 @@ public class UserVM extends BaseVM<User> {
 
     @Bindable
     public String getName(){
-        return model.name;
+
+        return model.getName();
     }
+
 
 }

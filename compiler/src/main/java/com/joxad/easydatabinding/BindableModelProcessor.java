@@ -25,9 +25,9 @@ import static javax.lang.model.SourceVersion.latestSupported;
 import static javax.tools.Diagnostic.Kind.ERROR;
 
 @AutoService(Processor.class)
-public class DataBindableProcessor extends AbstractProcessor {
+public class BindableModelProcessor extends AbstractProcessor {
 
-    private static final String ANNOTATION = "@" + DataBindable.class.getSimpleName();
+    private static final String ANNOTATION = "@" + BindableModel.class.getSimpleName();
 
     private Messager messager;
 
@@ -39,7 +39,7 @@ public class DataBindableProcessor extends AbstractProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return singleton(DataBindable.class.getCanonicalName());
+        return singleton(BindableModel.class.getCanonicalName());
     }
 
     @Override
@@ -50,7 +50,7 @@ public class DataBindableProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         ArrayList<AnnotatedClass> annotatedClasses = new ArrayList<>();
-        for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(DataBindable.class)) {
+        for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(BindableModel.class)) {
             // Our annotation is defined with @Target(value=TYPE). Therefore, we can assume that
             // this annotatedElement is a TypeElement.
             TypeElement annotatedClass = (TypeElement) annotatedElement;
@@ -59,7 +59,7 @@ public class DataBindableProcessor extends AbstractProcessor {
             }
             try {
                 annotatedClasses.add(buildAnnotatedClass(annotatedClass));
-            } catch (com.joxad.easydatabinding.NoPackageNameException | IOException e) {
+            } catch (NoPackageNameException | IOException e) {
                 String message = String.format("Couldn't process class %s: %s", annotatedClass,
                         e.getMessage());
                 messager.printMessage(ERROR, message, annotatedElement);
@@ -94,31 +94,30 @@ public class DataBindableProcessor extends AbstractProcessor {
 
     private AnnotatedClass buildAnnotatedClass(TypeElement annotatedClass)
             throws NoPackageNameException, IOException {
-        ArrayList<String> variableNames = new ArrayList<>();
+        ArrayList<VariableElement> variableNames = new ArrayList<>();
         for (Element element : annotatedClass.getEnclosedElements()) {
             if (!(element instanceof VariableElement)) {
                 continue;
             }
             VariableElement variableElement = (VariableElement) element;
-            variableNames.add(variableElement.getSimpleName().toString());
+            variableNames.add(variableElement);
         }
         return new AnnotatedClass(annotatedClass, variableNames);
     }
 
     /***
      *
-     * @param annos
+     ** @param annos
      * @throws NoPackageNameException
      * @throws IOException
      */
-    private void generate(List<AnnotatedClass> annos) throws NoPackageNameException, IOException {
+    private void generate( List<AnnotatedClass> annos) throws NoPackageNameException, IOException {
         if (annos.size() == 0) {
             return;
         }
-
         for (AnnotatedClass annotatedClass : annos) {
             String packageName = Utils.getPackageName(processingEnv.getElementUtils(), annotatedClass.typeElement);
-            TypeSpec genratedClass = CodeGenerator.generateClass(packageName,annotatedClass);
+            TypeSpec genratedClass = CodeGenerator.generateBaseVMClass(packageName,annotatedClass);
 
             JavaFile javaFile = builder(packageName, genratedClass).build();
             javaFile.writeTo(processingEnv.getFiler());

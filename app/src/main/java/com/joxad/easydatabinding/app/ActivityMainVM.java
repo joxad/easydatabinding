@@ -32,7 +32,7 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
     public void init() {
         items = new ObservableArrayList<>();
         for (int i = 0; i < 10; i++) {
-            items.add(new UserVM(activity, new User("User" + i)));
+            items.add(new UserVM(activity, User.builder().name("User" + i).build()));
         }
 
     }

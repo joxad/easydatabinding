@@ -18,12 +18,12 @@ allprojects {
 }
 
 ext {
-    userOrg = 'attwellbrian'
-    groupId = 'com.brianattwell'
-    uploadName = 'Android-StaticToStringUtil'
-    description = 'Demonstration of annotation processing inside Gradle project'
-    publishVersion = '0.3.5'
-    website = 'http://brianattwell.com'
+    userOrg = 'joxad'
+    groupId = 'com.joxad.easydatabinidng'
+    uploadName = 'EasyDataBinding'
+    description = 'Library Helper for DataBinding / MVVM Pattern'
+    publishVersion = '0.5.0'
+    website = 'https://github.com/joxad/easydatabinding'
     licences = ['MIT']
 }
 apply from: 'gradle/tasks/imports.gradle'

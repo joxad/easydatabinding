@@ -31,4 +31,5 @@ dependencies {
     compile libs.recyclerViewDataBinding
     compile libs.recyclerViewAdapter
     provided libs.lombok
+    apt libs.lombok
 }

@@ -13,7 +13,7 @@ import javax.lang.model.element.VariableElement;
 /**
  *
  */
-final class CodeGenerator {
+final class BaseVMCodeGenerator {
 
     public static TypeSpec generateClass(String packageName, AnnotatedClass annotatedClass) {
 
