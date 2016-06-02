@@ -5,7 +5,7 @@
 
         <variable
             name="userVM"
-            type="com.joxad.easydatabinding.app.UserVM" />
+            type="com.joxad.easydatabinding.app.UserVM_" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

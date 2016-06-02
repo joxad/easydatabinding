@@ -60,36 +60,37 @@ public final class CodeGenerator {
                 return new ActivityMainVM(this, binding);
             }*/
         String generatedClassName = annotatedClass.annotatedClassName + "_";
-        ClassName modelClass = ClassName.get(packageName, annotatedClass.annotatedClassName);
+        ClassName activityBinding = ClassName.get("com.joxad.easydatabinding.app.databinding", "ActivityMainBinding");
+        ClassName activityVMClass = ClassName.get("com.joxad.easydatabinding.app", "ActivityMainVM");
 
-        String parameterModelClass = Utils.lowerCaseFirstLetter(modelClass.simpleName());
-        ClassName baseVMClass = ClassName.get(String.format("%s.%s", AndroidUtils.PACKAGE_DATA_BINDING, AndroidUtils.PACKAGE_DATA_BINDING_BASE), AndroidUtils.CLASS_BASEVM);
-        TypeName baseModelVM = ParameterizedTypeName.get(baseVMClass, modelClass);
+        ClassName activityClass = ClassName.get(String.format("%s.%s", AndroidUtils.PACKAGE_DATA_BINDING,
+                AndroidUtils.PACKAGE_DATA_BINDING_ACTIVITY), AndroidUtils.CLASS_BASEACTIVITY);
 
+        TypeName baseModelVM = ParameterizedTypeName.get(activityClass, activityBinding, activityVMClass);
 
         //Init Method
         MethodSpec data = MethodSpec.methodBuilder("data")
                 .addAnnotation(Override.class)
                 .addModifiers(Modifier.PUBLIC)
-                .addStatement("return %s.BR.activityMainVM", packageName)
-                .returns(Integer.class).build();
+                .addStatement(String.format("return %s.BR.activityMainVM", packageName))
+                .returns(int.class).build();
 
         //destroy Method
-        MethodSpec layoutResources = MethodSpec.methodBuilder("destroy")
+        MethodSpec layoutResources = MethodSpec.methodBuilder("layoutResources")
                 .addAnnotation(Override.class)
                 .addModifiers(Modifier.PUBLIC)
-                .addStatement("return R.layout.activityMainVM", packageName)
-                .returns(Integer.class).build();
+                .addStatement(String.format("return %s.R.layout.activity_main",packageName))
+                .returns(int.class).build();
 
 
         //destroy Method
-      /*  MethodSpec baseActivityVM = MethodSpec.methodBuilder("baseActivityVM")
+       /* MethodSpec baseActivityVM = MethodSpec.methodBuilder("baseActivityVM")
                 .addParameter(ParameterSpec.builder())
                 .addAnnotation(Override.class)
                 .addModifiers(Modifier.PUBLIC)
-                .addStatement("return R.layout.activityMainVM", packageName)
-                .returns(Integer.class).build();
-*/
+                .addStatement("return new ActivityMainVM(this, binding)", packageName)
+                .returns(Integer.class).build();*/
+
 
         //Building the VM class
         TypeSpec.Builder builder = TypeSpec.classBuilder(generatedClassName)
