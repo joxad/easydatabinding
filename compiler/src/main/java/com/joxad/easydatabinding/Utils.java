@@ -1,4 +1,4 @@
-package com.joxad.easydatabinding.compiler;
+package com.joxad.easydatabinding;
 
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;

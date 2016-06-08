@@ -111,4 +111,7 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
         if (vm instanceof INewIntent)
             ((INewIntent) vm).onNewIntent(intent);
     }
+
+
+
 }

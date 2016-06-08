@@ -1,4 +1,4 @@
-package com.joxad.easydatabinding.annotation;
+package com.joxad.easydatabinding;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;

@@ -1,4 +1,4 @@
-package com.joxad.easydatabinding.compiler;
+package com.joxad.easydatabinding;
 
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;

@@ -1,7 +1,6 @@
-package com.joxad.easydatabinding.compiler;
+package com.joxad.easydatabinding;
 
 import com.google.auto.service.AutoService;
-import com.joxad.easydatabinding.annotation.DataBindable;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 
@@ -48,7 +47,7 @@ public class DataBindableProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        ArrayList<AnnotatedClass> annotatedClasses = new ArrayList<>();
+        ArrayList<com.joxad.easydatabinding.AnnotatedClass> annotatedClasses = new ArrayList<>();
         for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(DataBindable.class)) {
             // Our annotation is defined with @Target(value=TYPE). Therefore, we can assume that
             // this annotatedElement is a TypeElement.
@@ -91,7 +90,7 @@ public class DataBindableProcessor extends AbstractProcessor {
         return true;
     }
 
-    private AnnotatedClass buildAnnotatedClass(TypeElement annotatedClass)
+    private com.joxad.easydatabinding.AnnotatedClass buildAnnotatedClass(TypeElement annotatedClass)
             throws NoPackageNameException, IOException {
         ArrayList<String> variableNames = new ArrayList<>();
         for (Element element : annotatedClass.getEnclosedElements()) {
@@ -101,16 +100,16 @@ public class DataBindableProcessor extends AbstractProcessor {
             VariableElement variableElement = (VariableElement) element;
             variableNames.add(variableElement.getSimpleName().toString());
         }
-        return new AnnotatedClass(annotatedClass, variableNames);
+        return new com.joxad.easydatabinding.AnnotatedClass(annotatedClass, variableNames);
     }
 
-    private void generate(List<AnnotatedClass> annos) throws NoPackageNameException, IOException {
+    private void generate(List<com.joxad.easydatabinding.AnnotatedClass> annos) throws NoPackageNameException, IOException {
         if (annos.size() == 0) {
             return;
         }
         String packageName = Utils.getPackageName(processingEnv.getElementUtils(),
                 annos.get(0).typeElement);
-        TypeSpec generatedClass = CodeGenerator.generateClass(annos);
+        TypeSpec generatedClass = com.joxad.easydatabinding.CodeGenerator.generateClass(annos);
 
         JavaFile javaFile = builder(packageName, generatedClass).build();
         javaFile.writeTo(processingEnv.getFiler());

@@ -1,4 +1,4 @@
-package com.joxad.easydatabinding.compiler;
+package com.joxad.easydatabinding;
 
 import java.util.List;
 

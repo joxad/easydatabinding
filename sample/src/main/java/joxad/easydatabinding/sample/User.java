@@ -1,6 +1,6 @@
 package joxad.easydatabinding.sample;
 
-import com.joxad.easydatabinding.annotation.DataBindable;
+import com.joxad.easydatabinding.DataBindable;
 
 /**
  * Created by josh on 13/04/16.
@@ -16,6 +16,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "";
+        return "";//DataBindableUtil.createString(this);
     }
 }
