@@ -1,6 +1,7 @@
 package joxad.easydatabinding.sample;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.joxad.easydatabinding.activity.ActivityBase;
 
@@ -27,4 +28,6 @@ public class ActivityMain extends ActivityBase<ActivityMainBinding, ActivityMain
     public ActivityMainVM baseActivityVM(ActivityMainBinding binding, Bundle savedInstanceState) {
         return new ActivityMainVM(this, binding);
     }
+
+
 }

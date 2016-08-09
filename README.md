@@ -1,8 +1,11 @@
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-easydatabinding-green.svg?style=true)](https://android-arsenal.com/details/1/4106)
+
 # easydatabinding
 This project goal is to create activity fragment and views, with less code to be more efficient on the view models
 
 
-# Version : 0.4.5
+# Version : 0.6.0
 # Goal
 
 I used DataBinding for a few weeks since Google allows us to use it.

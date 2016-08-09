@@ -3,6 +3,8 @@ package com.joxad.easydatabinding.activity;
 
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
+import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.joxad.easydatabinding.base.IVM;
 
@@ -51,5 +53,23 @@ public abstract class ActivityBaseVM<A extends ActivityBase, B extends ViewDataB
      */
     protected boolean onBackPressed() {
         return true;
+    }
+
+    /**
+     * PostCreate
+     *
+     * @param savedInstanceState
+     */
+    public void onPostCreate(Bundle savedInstanceState) {
+    }
+
+    /**
+     * Manage item
+     *
+     * @param item
+     * @return
+     */
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return false;
     }
 }

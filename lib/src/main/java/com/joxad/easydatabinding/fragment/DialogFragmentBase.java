@@ -1,3 +1,4 @@
+
 package com.joxad.easydatabinding.fragment;
 
 import android.content.Intent;
@@ -7,7 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import com.joxad.easydatabinding.activity.IResult;
 /**
  * Created by josh on 13/04/16.
  */
-public abstract class FragmentBase<B extends ViewDataBinding, VM extends FragmentBaseVM> extends Fragment {
+public abstract class DialogFragmentBase<B extends ViewDataBinding, VM extends DialogFragmentBaseVM> extends DialogFragment {
 
     /***
      * FragmentBinding used in this view
