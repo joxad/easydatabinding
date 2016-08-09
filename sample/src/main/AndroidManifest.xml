@@ -5,21 +5,17 @@
     <application
         android:allowBackup="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/EasyTheme">
 
 
 
         <activity android:name=".ActivityMain">
-
-        </activity>
-
-        <activity android:name=".ActivitySample">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

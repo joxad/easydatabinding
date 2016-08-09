@@ -8,6 +8,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 /**
  * {@link ActivityBase} will allow you to generate a basic activity that put your view model {@link B} and its {@link VM}
@@ -33,6 +34,7 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
         binding.setVariable(data(), vm);
     }
 
+
     @Override
     public void onBackPressed() {
         if (vm.onBackPressed() ) super.onBackPressed();
@@ -49,6 +51,20 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
     protected void onPause() {
         super.onPause();
         vm.onPause();
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        vm.onPostCreate(savedInstanceState);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (vm.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**

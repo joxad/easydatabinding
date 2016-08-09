@@ -3,7 +3,7 @@ package com.joxad.easydatabinding.activity;
 import android.support.annotation.NonNull;
 
 /**
- * Created by josh on 13/04/16.
+ * {@link IPermission} will handle the permission result from the activity
  */
 public interface IPermission {
     /***

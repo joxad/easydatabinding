@@ -3,7 +3,7 @@ package com.joxad.easydatabinding.activity;
 import android.content.Intent;
 
 /**
- *
+ * {@link IResult} will handle the onActivityResult from the activity
  */
 public interface IResult {
 
