@@ -38,7 +38,7 @@ repositories {
 Gradle project :
 
 ```groovy
-compile "com.joxad.easydatabinding.lib:$currentVersion"
+compile "com.joxad.easydatabinding:lib:$currentVersion"
 ```
 
 
