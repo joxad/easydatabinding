@@ -30,14 +30,14 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, layoutResources());
-        vm = baseActivityVM(binding,savedInstanceState);
+        vm = baseActivityVM(binding, savedInstanceState);
         binding.setVariable(data(), vm);
     }
 
 
     @Override
     public void onBackPressed() {
-        if (vm.onBackPressed() ) super.onBackPressed();
+        if (vm.onBackPressed()) super.onBackPressed();
     }
 
     @Override
@@ -128,6 +128,13 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
             ((INewIntent) vm).onNewIntent(intent);
     }
 
-
+    /**
+     * Handle animation of sharedelement
+     */
+    @Override
+    public void onEnterAnimationComplete() {
+        super.onEnterAnimationComplete();
+        vm.onEnterAnimationComplete();
+    }
 
 }

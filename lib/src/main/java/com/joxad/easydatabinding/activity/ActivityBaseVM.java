@@ -72,4 +72,11 @@ public abstract class ActivityBaseVM<A extends ActivityBase, B extends ViewDataB
     public boolean onOptionsItemSelected(MenuItem item) {
         return false;
     }
+
+    /**
+     * Handle animation of sharedelement
+     */
+    public void onEnterAnimationComplete() {
+
+    }
 }
