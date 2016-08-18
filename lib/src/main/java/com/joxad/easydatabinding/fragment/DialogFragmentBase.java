@@ -16,20 +16,21 @@ import android.view.ViewGroup;
 import com.joxad.easydatabinding.activity.IPermission;
 import com.joxad.easydatabinding.activity.IResult;
 
-/**
- * Created by josh on 13/04/16.
+
+/***
+ * @param <B>       Class  that need to extends {@link ViewDataBinding}
+ * @param <VM>Class that need to extends {@link DialogFragmentBaseVM}
  */
 public abstract class DialogFragmentBase<B extends ViewDataBinding, VM extends DialogFragmentBaseVM> extends DialogFragment {
 
     /***
      * FragmentBinding used in this view
      */
-
     protected B binding;
+
     /***
      * The view model that will be used to handle this fragment
      */
-
     protected VM vm;
 
     @Nullable

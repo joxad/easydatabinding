@@ -2,13 +2,17 @@
 ext {
 
     rvDataBindingVersion = "1.1.0"
-    supportLibraryVersion = "23.3.0"
+    supportLibraryVersion = "24.1.1"
     lombokVersion = "1.12.6"
 
     libs = [
             appCompat              : "com.android.support:appcompat-v7:$supportLibraryVersion",
             lombok                 : "org.projectlombok:lombok:$lombokVersion",//use provided
             recyclerViewAdapter    : "me.tatarka.bindingcollectionadapter:bindingcollectionadapter:$rvDataBindingVersion",
-            recyclerViewDataBinding: "me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:$rvDataBindingVersion"
+            recyclerViewDataBinding: "me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:$rvDataBindingVersion",
+            support                : "com.android.support:support-v13:$supportLibraryVersion",
+            design                 : "com.android.support:design:$supportLibraryVersion"
+
+
     ]
 }
