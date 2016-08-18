@@ -6,14 +6,13 @@ import android.databinding.ViewDataBinding;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.view.LayoutInflater;
 
-import com.joxad.easydatabinding.base.IVM;
 import com.joxad.easydatabinding.fragment.DialogFragmentBaseVM;
 
 /***
  * @param <B>Class  that need to extends {@link ViewDataBinding}
  * @param <VM>Class that need to extends {@link DialogFragmentBaseVM}
  */
-public abstract class DialogBottomSheetBase<B extends ViewDataBinding, VM extends DialogBottomSheetBaseVM> extends BottomSheetDialogFragment implements IVM {
+public abstract class DialogBottomSheetBase<B extends ViewDataBinding, VM extends DialogBottomSheetBaseVM> extends BottomSheetDialogFragment {
 
     /***
      * FragmentBinding used in this view
