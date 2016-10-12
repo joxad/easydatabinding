@@ -2,6 +2,8 @@ package com.joxad.easydatabinding.fragment;
 
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.joxad.easydatabinding.base.IVM;
 
@@ -11,6 +13,7 @@ import com.joxad.easydatabinding.base.IVM;
  */
 public abstract class DialogFragmentBaseVM<F extends DialogFragmentBase, B extends ViewDataBinding> extends BaseObservable implements IVM {
 
+    private final Handler uiHandler;
     /***
      * {@link F} is the fragment that use the current VM
      */
@@ -27,6 +30,7 @@ public abstract class DialogFragmentBaseVM<F extends DialogFragmentBase, B exten
     public DialogFragmentBaseVM(F fragment, B binding) {
         this.fragment = fragment;
         this.binding = binding;
+        this.uiHandler = new Handler(Looper.getMainLooper());
         init();
     }
 
