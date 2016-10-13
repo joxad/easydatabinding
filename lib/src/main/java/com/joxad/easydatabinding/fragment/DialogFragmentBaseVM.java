@@ -13,7 +13,7 @@ import com.joxad.easydatabinding.base.IVM;
  */
 public abstract class DialogFragmentBaseVM<F extends DialogFragmentBase, B extends ViewDataBinding> extends BaseObservable implements IVM {
 
-    private final Handler uiHandler;
+    protected final Handler uiHandler;
     /***
      * {@link F} is the fragment that use the current VM
      */

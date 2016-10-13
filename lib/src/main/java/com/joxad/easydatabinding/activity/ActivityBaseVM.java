@@ -15,7 +15,7 @@ import com.joxad.easydatabinding.base.IVM;
  */
 public abstract class ActivityBaseVM<A extends ActivityBase, B extends ViewDataBinding> extends BaseObservable implements IVM {
 
-    private final Handler uiHandler;
+    protected final Handler uiHandler;
     /***
      *
      */
