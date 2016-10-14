@@ -5,7 +5,7 @@
 This project goal is to create activity fragment and views, with less code to be more efficient on the view models
 
 
-# Version : 0.9.0
+# Version : 0.9.2
 # Goal
 
 I used DataBinding for a few weeks since Google allows us to use it.
@@ -82,12 +82,7 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
     }
 
     @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void destroy() {
+    public void onCreate() {
 
     }
 }
@@ -96,9 +91,21 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
 
 ### More
 
-To handle Result there are useful interfaces you can put in your VM's class of your activity
+- To handle Result there are useful interfaces you can put in your VM's class of your activity
 
+For example, you can implement :
+```java
+IPermission //handle permission result from android 5.0+ 
+IResult // handle the result from another activity
+INewIntent // called when activity receives a new intent
 
+```
+
+- Handler
+
+All the ActivityBaseVM/FragmentBaseVM have 2 handler :
+- uiHandler to handle runnable to do tasks on the uiThread (like showToast on a callback from a WS)
+- handler classic to create runnable on the fly 
 
 ## Notes about the DataBinding
 
