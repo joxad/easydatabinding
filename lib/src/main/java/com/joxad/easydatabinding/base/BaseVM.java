@@ -24,6 +24,22 @@ public abstract class BaseVM<T> extends BaseObservable implements IVM {
     public BaseVM(Context context, T model) {
         this.context = context;
         this.model = model;
-        init();
+        onCreate();
+    }
+
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
     }
 }

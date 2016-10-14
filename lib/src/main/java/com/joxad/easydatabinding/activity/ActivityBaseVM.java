@@ -33,20 +33,22 @@ public abstract class ActivityBaseVM<A extends ActivityBase, B extends ViewDataB
         this.activity = activity;
         this.binding = binding;
         this.uiHandler = new Handler(Looper.getMainLooper());
-        init();
+        onCreate();
     }
 
-    /***
-     * LifeCycle of the Activity
-     */
-    protected void onResume() {
+
+    @Override
+    public void onResume() {
 
     }
 
-    /***
-     * LifeCycle of the Activity
-     */
-    protected void onPause() {
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onDestroy() {
 
     }
 
@@ -60,7 +62,7 @@ public abstract class ActivityBaseVM<A extends ActivityBase, B extends ViewDataB
     }
 
     /**
-     * PostCreate
+     * PostCreate to use if you need the savedInstanceState
      *
      * @param savedInstanceState
      */

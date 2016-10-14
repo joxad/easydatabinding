@@ -18,12 +18,7 @@ public class UserVM extends BaseVM<User> {
     }
 
     @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void destroy() {
+    public void onCreate() {
 
     }
 

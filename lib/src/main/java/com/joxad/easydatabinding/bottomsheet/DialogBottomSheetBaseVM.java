@@ -29,22 +29,23 @@ public abstract class DialogBottomSheetBaseVM<F extends DialogBottomSheetBase, B
     public DialogBottomSheetBaseVM(F fragment, B binding) {
         this.fragment = fragment;
         this.binding = binding;
-        init();
+        onCreate();
     }
 
-    /***
-     * LifeCycle of the Fragment
-     */
-    protected void onResume() {
-
-    }
-
-    /***
-     * LifeCycle of the fragment
-     */
-    protected void onPause() {
+    @Override
+    public void onResume() {
 
     }
 
-    public abstract void init();
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
+    }
+
+    public abstract void onCreate();
 }

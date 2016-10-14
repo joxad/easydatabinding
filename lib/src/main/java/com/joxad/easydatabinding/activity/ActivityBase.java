@@ -54,6 +54,12 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        vm.onDestroy();
+    }
+
+    @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         vm.onPostCreate(savedInstanceState);

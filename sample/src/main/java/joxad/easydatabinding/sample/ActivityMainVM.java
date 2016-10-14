@@ -32,7 +32,7 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
     }
 
     @Override
-    public void init() {
+    public void onCreate() {
         items = new ObservableArrayList<>();
         for (int i = 0; i < 10; i++) {
             items.add(new UserVM(activity, new User("User" + i)));
@@ -40,8 +40,5 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
 
     }
 
-    @Override
-    public void destroy() {
 
-    }
 }

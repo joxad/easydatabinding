@@ -31,22 +31,26 @@ public abstract class FragmentBaseVM<F extends FragmentBase, B extends ViewDataB
         this.fragment = fragment;
         this.binding = binding;
         this.uiHandler = new Handler(Looper.getMainLooper());
-        init();
+        onCreate();
     }
 
-    /***
-     * LifeCycle of the Fragment
+    public abstract void onCreate();
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    /**
+     * This is optionnal => use it if needed
      */
-    protected void onResume() {
+    @Override
+    public void onDestroy() {
 
     }
-
-    /***
-     * LifeCycle of the fragment
-     */
-    protected void onPause() {
-
-    }
-
-    public abstract void init();
 }

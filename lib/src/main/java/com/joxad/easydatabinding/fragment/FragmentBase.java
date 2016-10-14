@@ -53,6 +53,11 @@ public abstract class FragmentBase<B extends ViewDataBinding, VM extends Fragmen
         vm.onPause();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        vm.onDestroy();
+    }
 
     /***
      * Handle the permission and give it to the activity
