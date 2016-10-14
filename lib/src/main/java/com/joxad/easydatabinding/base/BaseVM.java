@@ -15,6 +15,7 @@ public abstract class BaseVM<T> extends BaseObservable implements IVM {
     /**
      * Class Model used in your IVM
      */
+
     protected T model;
 
     /***
@@ -41,5 +42,9 @@ public abstract class BaseVM<T> extends BaseObservable implements IVM {
     @Override
     public void onDestroy() {
 
+    }
+
+    public T getModel() {
+        return model;
     }
 }

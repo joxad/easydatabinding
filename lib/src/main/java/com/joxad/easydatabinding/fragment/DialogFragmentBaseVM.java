@@ -14,6 +14,7 @@ import com.joxad.easydatabinding.base.IVM;
 public abstract class DialogFragmentBaseVM<F extends DialogFragmentBase, B extends ViewDataBinding> extends BaseObservable implements IVM {
 
     protected final Handler uiHandler;
+    protected final Handler handler;
     /***
      * {@link F} is the fragment that use the current VM
      */
@@ -30,6 +31,8 @@ public abstract class DialogFragmentBaseVM<F extends DialogFragmentBase, B exten
     public DialogFragmentBaseVM(F fragment, B binding) {
         this.fragment = fragment;
         this.binding = binding;
+        this.handler = new Handler();
+
         this.uiHandler = new Handler(Looper.getMainLooper());
         onCreate();
     }

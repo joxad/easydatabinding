@@ -14,6 +14,7 @@ import com.joxad.easydatabinding.base.IVM;
  * Created by josh on 13/04/16.
  */
 public abstract class ActivityBaseVM<A extends ActivityBase, B extends ViewDataBinding> extends BaseObservable implements IVM {
+    protected final Handler handler;
 
     protected final Handler uiHandler;
     /***
@@ -32,6 +33,7 @@ public abstract class ActivityBaseVM<A extends ActivityBase, B extends ViewDataB
     public ActivityBaseVM(A activity, B binding) {
         this.activity = activity;
         this.binding = binding;
+        this.handler = new Handler();
         this.uiHandler = new Handler(Looper.getMainLooper());
         onCreate();
     }
