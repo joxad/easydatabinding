@@ -2,19 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="joxad.easydatabinding.sample">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/EasyTheme">
 
 
-
-        <activity android:name=".ActivityMain">
+        <activity android:name=".home.ActivityMain"
+            android:label="Star Wars Sample">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".people.ActivityPeople"/>
 
     </application>
 

@@ -9,13 +9,13 @@
 
         <variable
             name="activityMainVM"
-            type="joxad.easydatabinding.sample.ActivityMainVM" />
+            type="joxad.easydatabinding.sample.home.ActivityMainVM" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ActivityMainVM">
+        tools:context=".home.ActivityMainVM">
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"

@@ -23,14 +23,13 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':lib')
-    compile project(':annotation')
-
-
-    apt project(':compiler')
-
+    compile "com.android.support:appcompat-v7:23.1.1"
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.google.code.gson:gson:2.4'
     compile libs.recyclerViewDataBinding
     compile libs.recyclerViewAdapter
 
+    compile project(path: ':lib')
 }
 

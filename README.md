@@ -5,7 +5,7 @@
 This project goal is to create activity fragment and views, with less code to be more efficient on the view models
 
 
-# Version : 0.9.2
+# Version : 1.0.0
 # Goal
 
 I used DataBinding for a few weeks since Google allows us to use it.
@@ -41,8 +41,6 @@ Gradle project :
 compile "com.joxad.easydatabinding:lib:$currentVersion"
 ```
 
-
-
 ### Fast Sample
 
 With the library an activity will be :
@@ -53,7 +51,7 @@ public class ActivityMain extends ActivityBase<ActivityMainBinding,ActivityMainV
 
     @Override
     public int data() {
-        return joxad.easydatabinding.sample.BR.activityMainVM;
+        return BR.activityMainVM;
     }
 
     @Override
@@ -89,7 +87,19 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
 ```
 
 
+### WTF : you have two classes ??? Why don't you put all the logic in the ActivityBase / FragmentBase ?
+
+Well, in order to use the databinding, the classes that will handle the view must extends BaseObservable, and in some cases,
+some data are to be visible only in this unique fragment.
+
+So the activity now become a way to access the views (with the bindings) and the VM class will handle all the treatments.
+
+
 ### More
+
+
+- See the package sample in order to see in working with a API using retrofit. I used https://swapi.co/ for sample.
+
 
 - To handle Result there are useful interfaces you can put in your VM's class of your activity
 
