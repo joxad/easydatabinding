@@ -23,6 +23,17 @@ https://github.com/evant/binding-collection-adapter/
 
 It handles the databinding inside the recyclerview => No adapter to write :)
 
+
+
+## Side project very usefull if you are lazy (I am)
+
+
+https://github.com/joxad/generator-android-template
+
+If you know yeoman, you won't be surprised.
+It is a generator that will help you create the activity/vm data (see below and the sample for more details)
+
+
 ## How to use it
 
 Gradle root :
@@ -86,13 +97,45 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
 }
 ```
 
+You will need a layout :
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+
+        <variable
+            name="activityMainVM"
+            type="joxad.easydatabinding.sample.home.ActivityMainVM" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".home.ActivityMainVM">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:itemView="@{activityMainVM.itemView}"
+            app:items="@{activityMainVM.items}"
+            app:layoutManager="@{LayoutManagers.linear()}" />
+    </RelativeLayout>
+</layout>
+```
 
 ### WTF : you have two classes ??? Why don't you put all the logic in the ActivityBase / FragmentBase ?
 
 Well, in order to use the databinding, the classes that will handle the view must extends BaseObservable, and in some cases,
-some data are to be visible only in this unique fragment.
+some data needs to be visible only in this unique fragment.
 
 So the activity now become a way to access the views (with the bindings) and the VM class will handle all the treatments.
+
 
 
 ### More
@@ -126,128 +169,4 @@ All the ActivityBaseVM/FragmentBaseVM have 2 handler :
 
     - WS Calls . Database to update the recyclerview of the layout
     - activityresult of activity (for facebook . google login for example)
-
-So in a very general case, code of an activity will look like this :
-
-### Activity
-
-For example, in class DB, we have to do
-
--  layout
--  class activity
--  class view model linked to the activity
-
-
-
-#### Layout
-
-First of all we need something like this for the layout
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-
-<layout xmlns:android="http:..schemas.android.com.apk.res.android"
-    xmlns:app="http:..schemas.android.com.apk.res-auto"
-    xmlns:tools="http:..schemas.android.com.tools">
-
-    <data>
-
-
-        <variable
-            name="activityXXXViewModel"
-            type="package.to.your.viewmodel.ActivityXXXViewModel" .>
-    </data>
-
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:bindingContext=".core.MainActivity">
-
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style.AppTheme.AppBarOverlay">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id.toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr.actionBarSize"
-                android:background="?attr.colorPrimary"
-                app:popupTheme="@style.AppTheme.PopupOverlay" .>
-
-        </android.support.design.widget.AppBarLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string.appbar_scrolling_view_behavior">
-
-
-
-        </RelativeLayout>
-
-
-    </android.support.design.widget.CoordinatorLayout>
-</layout>
-
-```
-
-Then Comes our view model :
-
-### ViewModel : XXXActivityViewModel
-
-```java
-
-public class ActivityXXXViewModel extends BaseObservable implements ViewModel {
-    private static final String TAG = ActivityXViewModel.class.getSimpleName();
-
-
-    private final Context context;
-    private final ActivityXXXBinding binding;
-    §/***
-     * @param context
-     */
-    public ActivityXXXViewModel(ActivityXXX context, ActivityXXXBinding binding) {
-        this.context = context;
-        this.binding = binding;
-    }
-
-    @Override
-    public void onDestroy() {
-
-    }
-
-}
-
-```
-
-### Activity : XXXActivity
-
-It will just manage to put the viewmodel into the activity
-
-
-```java
-
-public class XXXActivity extends AppCompatActivity {
-
-    /**
-    * Generated class by Android when used DataBinding
-    **/
-    ActivityXXXBinding binding;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_xxx);
-        setSupportActionBar(binding.toolbar);
-        ActivityXXXViewModel activityXXXViewModel = new ActivityXXXViewModel(this);
-        binding.setActivityXXXViewModel(activityXXXViewModel);
-        binding.xxxRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-}
-
-```
 
