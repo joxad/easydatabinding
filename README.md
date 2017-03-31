@@ -16,10 +16,13 @@ So I make this library to avoid boilerplate, and you will be able to focus on yo
 
 ## Thanks
 
-Very useful lib I use :
+Very useful lib used in easydatabinding :
 
 https://github.com/evant/binding-collection-adapter/
 
+If you want to use it without easydatabinding , just add this
+compile "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:2.0.1"
+compile "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.0.1"
 
 It handles the databinding inside the recyclerview => No adapter to write :)
 
@@ -54,8 +57,6 @@ Gradle project :
 ```groovy
 
 compile "com.joxad.easydatabinding:lib:$currentVersion"
-compile "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:2.0.1"
-compile "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.0.1"
 
 ```
 
