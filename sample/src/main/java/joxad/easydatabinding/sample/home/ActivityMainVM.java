@@ -6,8 +6,6 @@ import android.util.Log;
 
 import com.joxad.easydatabinding.activity.ActivityBaseVM;
 
-import java.util.List;
-
 import joxad.easydatabinding.sample.core.Extra;
 import joxad.easydatabinding.sample.core.StarWarsApi;
 import joxad.easydatabinding.sample.core.model.PeopleResult;
@@ -15,7 +13,7 @@ import joxad.easydatabinding.sample.core.model.Result;
 import joxad.easydatabinding.sample.databinding.ActivityMainBinding;
 import joxad.easydatabinding.sample.people.ActivityPeople;
 import joxad.easydatabinding.sample.people.PeopleVM;
-import me.tatarka.bindingcollectionadapter.ItemView;
+import me.tatarka.bindingcollectionadapter2.ItemBinding;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +30,7 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
     /***
      * This is the itemView view that will put the user in the
      */
-    public ItemView itemView = ItemView.of(peopleVM, item_people);
+    public ItemBinding<PeopleVM> itemView = ItemBinding.of(peopleVM, item_people);
 
     public ObservableArrayList<PeopleVM> items;
 
@@ -49,14 +47,6 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
 
         StarWarsApi.INSTANCE.init(activity);
         items = new ObservableArrayList<>();
-
-
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
         items.clear();
         StarWarsApi.INSTANCE.people().enqueue(new Callback<PeopleResult>() {
             @Override
@@ -76,7 +66,10 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
                 Log.d(ActivityMain.class.getSimpleName(), t.getLocalizedMessage());
             }
         });
+
+
     }
+
 
     private void goToActivityPeople(Result people) {
         activity.startActivity(new Intent(activity, ActivityPeople.class).putExtra(Extra.PEOPLE, people));

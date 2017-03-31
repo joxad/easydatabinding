@@ -5,7 +5,7 @@
 This project goal is to create activity fragment and views, with less code to be more efficient on the view models
 
 
-# Version : 1.0.0
+# Version : 1.0.1
 # Goal
 
 I used DataBinding for a few weeks since Google allows us to use it.
@@ -36,6 +36,8 @@ It is a generator that will help you create the activity/vm data (see below and 
 
 ## How to use it
 
+It requires at least android gradle plugin 2.3.0.
+
 Gradle root :
 
 ```groovy
@@ -44,12 +46,17 @@ repositories {
         url  "http://dl.bintray.com/joxad/maven"
     }
 }
+
 ```
 
 Gradle project :
 
 ```groovy
+
 compile "com.joxad.easydatabinding:lib:$currentVersion"
+compile "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:2.0.1"
+compile "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.0.1"
+
 ```
 
 ### Fast Sample
@@ -82,6 +89,14 @@ And your VM :
 
 ```java
 public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBinding> {
+
+    /***
+     * This is the itemView view that will put the user in the
+     */
+    public ItemBinding<PeopleVM> itemView = ItemBinding.of(peopleVM, item_people);
+
+    public ObservableArrayList<PeopleVM> items;
+
     /***
      * @param activity
      * @param binding
@@ -93,8 +108,42 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
     @Override
     public void onCreate() {
 
+        StarWarsApi.INSTANCE.init(activity);
+        items = new ObservableArrayList<>();
+
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        items.clear();
+        StarWarsApi.INSTANCE.people().enqueue(new Callback<PeopleResult>() {
+            @Override
+            public void onResponse(Call<PeopleResult> call, Response<PeopleResult> response) {
+                for (Result people : response.body().getResults()) {
+                    items.add(new PeopleVM(activity, people).setOnSelected(new PeopleVM.OnSelected() {
+                        @Override
+                        public void people(Result people) {
+                            goToActivityPeople(people);
+                        }
+                    }));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PeopleResult> call, Throwable t) {
+                Log.d(ActivityMain.class.getSimpleName(), t.getLocalizedMessage());
+            }
+        });
+    }
+
+    private void goToActivityPeople(Result people) {
+        activity.startActivity(new Intent(activity, ActivityPeople.class).putExtra(Extra.PEOPLE, people));
     }
 }
+
 ```
 
 You will need a layout :
@@ -107,7 +156,7 @@ You will need a layout :
 
     <data>
 
-        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
 
         <variable
             name="activityMainVM"
