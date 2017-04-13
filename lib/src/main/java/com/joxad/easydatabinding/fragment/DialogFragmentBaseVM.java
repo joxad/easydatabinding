@@ -1,5 +1,6 @@
 package com.joxad.easydatabinding.fragment;
 
+import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
 import android.os.Handler;
@@ -53,4 +54,6 @@ public abstract class DialogFragmentBaseVM<F extends DialogFragmentBase, B exten
     }
 
     public abstract void onCreate();
+
+    public abstract void onAttach(Context context) ;
 }

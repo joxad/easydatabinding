@@ -1,6 +1,7 @@
 
 package com.joxad.easydatabinding.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -55,6 +56,11 @@ public abstract class DialogFragmentBase<B extends ViewDataBinding, VM extends D
         vm.onPause();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        vm.onAttach(context);
+    }
 
     /***
      * Handle the permission and give it to the activity

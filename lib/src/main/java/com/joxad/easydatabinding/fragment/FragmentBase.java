@@ -1,5 +1,6 @@
 package com.joxad.easydatabinding.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -46,6 +47,15 @@ public abstract class FragmentBase<B extends ViewDataBinding, VM extends Fragmen
         super.onResume();
         vm.onResume();
     }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        vm.onAttach(context);
+    }
+
+
 
     @Override
     public void onPause() {

@@ -1,5 +1,6 @@
 package com.joxad.easydatabinding.fragment;
 
+import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
 import android.os.Handler;
@@ -55,4 +56,6 @@ public abstract class FragmentBaseVM<F extends FragmentBase, B extends ViewDataB
     public void onDestroy() {
 
     }
+
+    public abstract void onAttach(Context context);
 }
