@@ -1,5 +1,6 @@
 package com.joxad.easydatabinding.bottomsheet;
 
+import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
 import android.os.Handler;
@@ -55,4 +56,6 @@ public abstract class DialogBottomSheetBaseVM<F extends DialogBottomSheetBase, B
     }
 
     public abstract void onCreate();
+
+    public abstract void onAttach(Context context);
 }

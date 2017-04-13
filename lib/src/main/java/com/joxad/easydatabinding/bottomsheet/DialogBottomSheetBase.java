@@ -1,6 +1,7 @@
 package com.joxad.easydatabinding.bottomsheet;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.design.widget.BottomSheetDialogFragment;
@@ -40,6 +41,12 @@ public abstract class DialogBottomSheetBase<B extends ViewDataBinding, VM extend
     public void onResume() {
         super.onResume();
         vm.onResume();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        vm.onAttach(context);
     }
 
     @Override
