@@ -43,11 +43,6 @@ public abstract class DialogBottomSheetBase<B extends ViewDataBinding, VM extend
         vm.onResume();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        vm.onAttach(context);
-    }
 
     @Override
     public void onPause() {

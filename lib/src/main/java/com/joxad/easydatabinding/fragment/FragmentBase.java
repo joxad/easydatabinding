@@ -50,14 +50,6 @@ public abstract class FragmentBase<B extends ViewDataBinding, VM extends Fragmen
 
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        vm.onAttach(context);
-    }
-
-
-
-    @Override
     public void onPause() {
         super.onPause();
         vm.onPause();

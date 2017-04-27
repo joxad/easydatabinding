@@ -54,6 +54,4 @@ public abstract class DialogFragmentBaseVM<F extends DialogFragmentBase, B exten
     }
 
     public abstract void onCreate();
-
-    public abstract void onAttach(Context context) ;
 }

@@ -56,6 +56,4 @@ public abstract class FragmentBaseVM<F extends FragmentBase, B extends ViewDataB
     public void onDestroy() {
 
     }
-
-    public abstract void onAttach(Context context);
 }

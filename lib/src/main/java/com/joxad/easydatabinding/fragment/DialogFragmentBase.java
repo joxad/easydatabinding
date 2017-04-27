@@ -55,13 +55,6 @@ public abstract class DialogFragmentBase<B extends ViewDataBinding, VM extends D
         super.onPause();
         vm.onPause();
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        vm.onAttach(context);
-    }
-
     /***
      * Handle the permission and give it to the activity
      *

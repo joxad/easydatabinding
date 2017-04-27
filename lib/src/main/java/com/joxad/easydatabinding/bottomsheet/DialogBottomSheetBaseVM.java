@@ -56,6 +56,4 @@ public abstract class DialogBottomSheetBaseVM<F extends DialogBottomSheetBase, B
     }
 
     public abstract void onCreate();
-
-    public abstract void onAttach(Context context);
 }
