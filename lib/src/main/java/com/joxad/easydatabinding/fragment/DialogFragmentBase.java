@@ -52,8 +52,8 @@ public abstract class DialogFragmentBase<B extends ViewDataBinding, VM extends D
 
     @Override
     public void onPause() {
-        super.onPause();
         vm.onPause();
+        super.onPause();
     }
     /***
      * Handle the permission and give it to the activity

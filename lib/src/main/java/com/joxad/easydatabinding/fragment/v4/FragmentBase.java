@@ -49,14 +49,14 @@ public abstract class FragmentBase<B extends ViewDataBinding, VM extends Fragmen
 
     @Override
     public void onPause() {
-        super.onPause();
         vm.onPause();
+        super.onPause();
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         vm.onDestroy();
+        super.onDestroy();
     }
 
     /***

@@ -49,14 +49,14 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
 
     @Override
     protected void onPause() {
-        super.onPause();
         vm.onPause();
+        super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         vm.onDestroy();
+        super.onDestroy();
     }
 
     @Override
