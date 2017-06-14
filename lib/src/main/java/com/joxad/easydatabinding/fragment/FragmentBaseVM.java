@@ -1,10 +1,11 @@
 package com.joxad.easydatabinding.fragment;
 
-import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.Nullable;
 
 import com.joxad.easydatabinding.base.IVM;
 
@@ -29,15 +30,14 @@ public abstract class FragmentBaseVM<F extends FragmentBase, B extends ViewDataB
      * @param
      * @param binding
      */
-    public FragmentBaseVM(F fragment, B binding) {
+    public FragmentBaseVM(F fragment, B binding, @Nullable Bundle savedInstance) {
         this.fragment = fragment;
         this.binding = binding;
         this.handler = new Handler();
         this.uiHandler = new Handler(Looper.getMainLooper());
-        onCreate();
+        onCreate(savedInstance);
     }
 
-    public abstract void onCreate();
 
     @Override
     public void onResume() {

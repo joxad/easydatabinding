@@ -6,7 +6,7 @@ import android.databinding.BaseObservable;
 /**
  * {@link T} is the class of your model for all your basics VI
  */
-public abstract class BaseVM<T> extends BaseObservable implements IVM {
+public abstract class BaseVM<T> extends BaseObservable {
 
     /***
      *
@@ -28,18 +28,19 @@ public abstract class BaseVM<T> extends BaseObservable implements IVM {
         onCreate();
     }
 
+    public abstract void onCreate();
 
-    @Override
+
     public void onResume() {
 
     }
 
-    @Override
+
     public void onPause() {
 
     }
 
-    @Override
+
     public void onDestroy() {
 
     }

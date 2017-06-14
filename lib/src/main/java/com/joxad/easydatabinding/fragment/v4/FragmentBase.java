@@ -35,7 +35,7 @@ public abstract class FragmentBase<B extends ViewDataBinding, VM extends Fragmen
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, layoutResources(), container, false);
-        vm = baseFragmentVM(binding);
+        vm = baseFragmentVM(binding, savedInstanceState);
         binding.setVariable(data(), vm);
         return binding.getRoot();
     }
@@ -44,18 +44,21 @@ public abstract class FragmentBase<B extends ViewDataBinding, VM extends Fragmen
     @Override
     public void onResume() {
         super.onResume();
-        vm.onResume();
+        if (vm != null)
+            vm.onResume();
     }
 
     @Override
     public void onPause() {
-        vm.onPause();
+        if (vm != null)
+            vm.onPause();
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
-        vm.onDestroy();
+        if (vm != null)
+            vm.onDestroy();
         super.onDestroy();
     }
 
@@ -69,8 +72,9 @@ public abstract class FragmentBase<B extends ViewDataBinding, VM extends Fragmen
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (vm instanceof IPermission)
-            ((IPermission) vm).onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (vm != null)
+            if (vm instanceof IPermission)
+                ((IPermission) vm).onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     /***
@@ -83,7 +87,7 @@ public abstract class FragmentBase<B extends ViewDataBinding, VM extends Fragmen
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (vm instanceof IResult)
+        if (vm != null) if (vm instanceof IResult)
             ((IResult) vm).onActivityResult(requestCode, resultCode, data);
     }
 
@@ -104,5 +108,5 @@ public abstract class FragmentBase<B extends ViewDataBinding, VM extends Fragmen
      * @param binding
      * @return the {@link VM} you want to use in this activity
      */
-    public abstract VM baseFragmentVM(B binding);
+    public abstract VM baseFragmentVM(B binding, @Nullable Bundle savedInstance);
 }

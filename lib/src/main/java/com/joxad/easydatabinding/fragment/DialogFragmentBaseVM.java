@@ -1,10 +1,11 @@
 package com.joxad.easydatabinding.fragment;
 
-import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.Nullable;
 
 import com.joxad.easydatabinding.base.IVM;
 
@@ -29,13 +30,13 @@ public abstract class DialogFragmentBaseVM<F extends DialogFragmentBase, B exten
      * @param
      * @param binding
      */
-    public DialogFragmentBaseVM(F fragment, B binding) {
+    public DialogFragmentBaseVM(F fragment, B binding, @Nullable Bundle savedInstance) {
         this.fragment = fragment;
         this.binding = binding;
         this.handler = new Handler();
 
         this.uiHandler = new Handler(Looper.getMainLooper());
-        onCreate();
+        onCreate(savedInstance);
     }
 
     @Override
@@ -52,6 +53,4 @@ public abstract class DialogFragmentBaseVM<F extends DialogFragmentBase, B exten
     public void onDestroy() {
 
     }
-
-    public abstract void onCreate();
 }

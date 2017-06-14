@@ -1,7 +1,6 @@
 
 package com.joxad.easydatabinding.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -38,7 +37,7 @@ public abstract class DialogFragmentBase<B extends ViewDataBinding, VM extends D
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, layoutResources(), container, false);
-        vm = baseFragmentVM(binding);
+        vm = baseFragmentVM(binding, savedInstanceState);
         binding.setVariable(data(), vm);
         return binding.getRoot();
     }
@@ -47,14 +46,24 @@ public abstract class DialogFragmentBase<B extends ViewDataBinding, VM extends D
     @Override
     public void onResume() {
         super.onResume();
-        vm.onResume();
+        if (vm != null)
+            vm.onResume();
     }
 
     @Override
     public void onPause() {
-        vm.onPause();
+        if (vm != null)
+            vm.onPause();
         super.onPause();
     }
+
+    @Override
+    public void onDestroy() {
+        if (vm != null)
+            vm.onDestroy();
+        super.onDestroy();
+    }
+
     /***
      * Handle the permission and give it to the activity
      *
@@ -65,8 +74,9 @@ public abstract class DialogFragmentBase<B extends ViewDataBinding, VM extends D
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (vm instanceof IPermission)
-            ((IPermission) vm).onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (vm != null)
+            if (vm instanceof IPermission)
+                ((IPermission) vm).onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     /***
@@ -79,8 +89,9 @@ public abstract class DialogFragmentBase<B extends ViewDataBinding, VM extends D
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (vm instanceof IResult)
-            ((IResult) vm).onActivityResult(requestCode, resultCode, data);
+        if (vm != null)
+            if (vm instanceof IResult)
+                ((IResult) vm).onActivityResult(requestCode, resultCode, data);
     }
 
     /**
@@ -100,5 +111,5 @@ public abstract class DialogFragmentBase<B extends ViewDataBinding, VM extends D
      * @param binding
      * @return the {@link VM} you want to use in this activity
      */
-    public abstract VM baseFragmentVM(B binding);
+    public abstract VM baseFragmentVM(B binding, @Nullable Bundle savedInstance);
 }

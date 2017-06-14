@@ -25,6 +25,6 @@ public class ActivityPeople extends ActivityBase<ActivityPeopleBinding, Activity
 
     @Override
     public ActivityPeopleVM baseActivityVM(ActivityPeopleBinding binding, Bundle savedInstanceState) {
-        return new ActivityPeopleVM(this,binding);
+        return new ActivityPeopleVM(this,binding,savedInstanceState);
     }
 }

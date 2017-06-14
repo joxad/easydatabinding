@@ -43,13 +43,15 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
     @Override
     protected void onResume() {
         super.onResume();
-        vm.onResume();
+        if (vm != null)
+            vm.onResume();
     }
 
 
     @Override
     protected void onPause() {
-        vm.onPause();
+        if (vm != null)
+            vm.onPause();
         super.onPause();
     }
 
@@ -62,14 +64,16 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        vm.onPostCreate(savedInstanceState);
+        if (vm != null)
+            vm.onPostCreate(savedInstanceState);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (vm.onOptionsItemSelected(item)) {
-            return true;
-        }
+        if (vm != null)
+            if (vm.onOptionsItemSelected(item)) {
+                return true;
+            }
         return super.onOptionsItemSelected(item);
     }
 
@@ -104,8 +108,9 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (vm instanceof IPermission)
-            ((IPermission) vm).onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (vm != null)
+            if (vm instanceof IPermission)
+                ((IPermission) vm).onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     /***
@@ -118,8 +123,9 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (vm instanceof IResult)
-            ((IResult) vm).onActivityResult(requestCode, resultCode, data);
+        if (vm != null)
+            if (vm instanceof IResult)
+                ((IResult) vm).onActivityResult(requestCode, resultCode, data);
     }
 
     /***
@@ -130,8 +136,9 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (vm instanceof INewIntent)
-            ((INewIntent) vm).onNewIntent(intent);
+        if (vm != null)
+            if (vm instanceof INewIntent)
+                ((INewIntent) vm).onNewIntent(intent);
     }
 
     /**
@@ -140,7 +147,8 @@ public abstract class ActivityBase<B extends ViewDataBinding, VM extends Activit
     @Override
     public void onEnterAnimationComplete() {
         super.onEnterAnimationComplete();
-        vm.onEnterAnimationComplete();
+        if (vm != null)
+            vm.onEnterAnimationComplete();
     }
 
 }

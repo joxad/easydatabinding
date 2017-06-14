@@ -6,6 +6,7 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.Nullable;
 import android.view.MenuItem;
 
 import com.joxad.easydatabinding.base.IVM;
@@ -30,12 +31,12 @@ public abstract class ActivityBaseVM<A extends ActivityBase, B extends ViewDataB
      * @param activity
      * @param binding
      */
-    public ActivityBaseVM(A activity, B binding) {
+    public ActivityBaseVM(A activity, B binding, @Nullable Bundle savedInstance) {
         this.activity = activity;
         this.binding = binding;
         this.handler = new Handler();
         this.uiHandler = new Handler(Looper.getMainLooper());
-        onCreate();
+        onCreate(savedInstance);
     }
 
 

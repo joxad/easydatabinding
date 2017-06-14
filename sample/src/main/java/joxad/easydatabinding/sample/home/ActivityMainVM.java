@@ -2,6 +2,8 @@ package joxad.easydatabinding.sample.home;
 
 import android.content.Intent;
 import android.databinding.ObservableArrayList;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.joxad.easydatabinding.activity.ActivityBaseVM;
@@ -38,12 +40,12 @@ public class ActivityMainVM extends ActivityBaseVM<ActivityMain, ActivityMainBin
      * @param activity
      * @param binding
      */
-    public ActivityMainVM(ActivityMain activity, ActivityMainBinding binding) {
-        super(activity, binding);
+    public ActivityMainVM(ActivityMain activity, ActivityMainBinding binding,@Nullable Bundle savedInstanceState) {
+        super(activity, binding, savedInstanceState);
     }
 
     @Override
-    public void onCreate() {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
 
         StarWarsApi.INSTANCE.init(activity);
         items = new ObservableArrayList<>();
